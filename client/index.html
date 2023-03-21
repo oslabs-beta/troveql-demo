@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Demo App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- if production-->
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- if development; see https://vitejs.dev/guide/backend-integration.html-->
+    <script type="module">
+      import RefreshRuntime from 'http://localhost:8080/@react-refresh'
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+
+    <script type="module" src="http://localhost:8080/@vite/client"></script>
+    <script type="module" src="http://localhost:8080/main.tsx"></script>
+  </body>
+</html>
