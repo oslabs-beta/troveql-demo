@@ -12,4 +12,10 @@ export default defineConfig({
       input: '/src/main.tsx',
     },
   },
+  server: {
+    port: 8080,
+    proxy: {
+      '/api': 'http://localhost:4000',
+    }
+  }
 })
