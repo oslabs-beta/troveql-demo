@@ -5,8 +5,11 @@ const { buildSchema } = require("graphql");
 const typeDefs = `#graphql
   # "Movie" is a type that lets clients query the API by movie title (required)
   type Movie {
+    id: ID
+    movie_id: Int!
     title: String!
-    director: String
+    vote_average: Float
+    vote_count: Int
   }
 
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
