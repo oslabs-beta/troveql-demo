@@ -19,6 +19,7 @@ const User = require('../database/models/userModel');
 //   {movie_id: 103, title: 'Harry Potter I', vote_count: 3000},
 //   {movie_id: 104, title: 'Harry Potter II', vote_count: 4000},
 //   {movie_id: 105, title: 'Harry Potter III'},
+//   {movie_id: 106, title: 'Harry Potter IV'},
 // ];
 
 // Movie.bulkCreate(testMovies)
@@ -28,7 +29,6 @@ const User = require('../database/models/userModel');
 //   .catch((error) => {
 //     console.error('Error creating movies', error);
 //   })
-
 
 // Creating new instances of users to PostgreSQL
 // const testUsers = [
@@ -104,4 +104,6 @@ const deleteItem = async () => {
   return;
 }
 
-deleteItem();
+// deleteItem();
+
+module.exports = { getMovies, getMovie, updateRating, deleteItem };

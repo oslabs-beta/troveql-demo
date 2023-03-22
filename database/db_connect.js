@@ -17,9 +17,6 @@ const sequelize = new Sequelize('postgres://akzvayps:qTVWKmn-i8cBzmDagJB6tvGGWs0
 // test();
 
 
-// create models for movies and user_rating
-
-
 
 module.exports = sequelize;
 
