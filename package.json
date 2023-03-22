@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
     "path": "^0.12.7",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
