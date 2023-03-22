@@ -5,16 +5,20 @@ const sequelize = new Sequelize('postgres://akzvayps:qTVWKmn-i8cBzmDagJB6tvGGWs0
 
 // test connection
 
-const test = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
+// const test = async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Connection has been established successfully.');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+// }
 
-test();
+// test();
+
+
+// create models for movies and user_rating
+
 
 
 module.exports = sequelize;
