@@ -50,12 +50,12 @@ const User = require('../database/models/userModel');
 
 // Getting all movies
 const getMovies = async () => {
-  const movies = await Movie.findAll();
+  const data = await Movie.findAll();
   const allMovies = [];
-  movies.forEach(movie => {
+  data.forEach(movie => {
     allMovies.push(movie.dataValues);
   })
-  console.log(allMovies);
+  // console.log(allMovies);
   return allMovies;
 }
 
@@ -76,34 +76,56 @@ const getMovie = async () => {
 // getMovie();
 
 
+// Getting a user's movie list
+const getUserMovies = async () => {
+  const data = await User.findAll({
+    where: {username: 'lunabar'},
+    include: [{
+      model: Movie,
+    }]
+  });
+  const userMovies = {};
+  userMovies.username = data[0].dataValues.username;
+  const favList = [];
+  data.forEach(item => {
+    item.dataValues.movie.dataValues.rating = item.rating;
+    favList.push(item.dataValues.movie.dataValues);
+  });
+  userMovies.movie = favList;
+  // console.log(userMovies);
+  return userMovies;
+}
+
+// getUserMovies();
+
 
 // Updating ratings of a movie from a user
-const updateRating = async () => {
-  const rate = await User.update({rating: 95}, {
-    where: {
-      username: 'oreo',
-      movie_id: 2,
-    }
-  });
-  console.log(rate);
-  return;
-}
+// const updateRating = async () => {
+//   const rate = await User.update({rating: 95}, {
+//     where: {
+//       username: 'oreo',
+//       movie_id: 2,
+//     }
+//   });
+//   console.log(rate);
+//   return;
+// }
 
 // updateRating();
 
 
 // Deleting a movie from a user's movie list 
-const deleteItem = async () => {
-  const itemDestroyed = await User.destroy({
-    where: {
-      username: 'oreo',
-      movie_id: 3,
-    }
-  });
-  console.log(itemDestroyed);
-  return;
-}
+// const deleteItem = async () => {
+//   const itemDestroyed = await User.destroy({
+//     where: {
+//       username: 'oreo',
+//       movie_id: 3,
+//     }
+//   });
+//   console.log(itemDestroyed);
+//   return;
+// }
 
 // deleteItem();
 
-module.exports = { getMovies, getMovie, updateRating, deleteItem };
+module.exports = { getMovies, getMovie, getUserMovies };
