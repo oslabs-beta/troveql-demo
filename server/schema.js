@@ -15,7 +15,8 @@ const typeDefs = `#graphql
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
   # The "movie" query returns an array of zero or more Movie objects
   type Query {
-    movies: [Movie!]!
+    movies: [Movie]!
+    movie(movie_id: Int!): [Movie]!
   }
 `;
 

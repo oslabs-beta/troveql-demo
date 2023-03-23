@@ -63,12 +63,13 @@ const getMovies = async () => {
 
 
 // Getting a movie's detail
-const getMovie = async () => {
-  const movie = await Movie.findAll({
+const getMovie = async (movie_id) => {
+  const movie = await Movie.findOne({
     where: {
-      title: 'Harry Potter I'
+      movie_id
     }
   });
+  console.log(movie);
   console.log(movie[0].dataValues);
   return movie[0].dataValues;
 }
