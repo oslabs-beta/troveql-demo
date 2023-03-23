@@ -48,6 +48,7 @@ const User = require('../database/models/userModel');
 //   })
 
 
+
 // Getting all movies
 const getMovies = async () => {
   const data = await Movie.findAll();
@@ -74,6 +75,7 @@ const getMovie = async () => {
 }
 
 // getMovie();
+
 
 
 // Getting a user's movie list
