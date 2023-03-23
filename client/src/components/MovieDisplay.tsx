@@ -2,7 +2,7 @@ import React from "react";
 
 function MovieDisplay(props) {
   let movieList = [];
-  console.log(props.movies)
+  // console.log(props.movies)
   props.movies.forEach(movie => {
     movieList.push(
       <li key={movie.title}>{movie.title}</li>

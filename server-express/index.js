@@ -28,7 +28,7 @@ app.use('/graphql',
 
 // add middleware function for use of TroveQL cache
 app.use('/', 
-  (req, res) => res.status(200).send('Welcome to the Express Server!')
+  (req, res) => res.status(200).json('Welcome to the Express Server!')
 );
 
 app.listen(PORT, () => console.log(`Express Server ready at http://localhost:${PORT}`));
