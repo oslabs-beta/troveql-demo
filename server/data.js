@@ -55,7 +55,7 @@ const getMovies = async () => {
   movies.forEach(movie => {
     allMovies.push(movie.dataValues);
   })
-  console.log(allMovies);
+  // console.log(allMovies);
   return allMovies;
 }
 
@@ -69,9 +69,9 @@ const getMovie = async (movie_id) => {
       movie_id
     }
   });
-  console.log(movie);
-  console.log(movie[0].dataValues);
-  return movie[0].dataValues;
+  // console.log(movie);
+  // console.log(movie.dataValues);
+  return [movie.dataValues];
 }
 
 // getMovie();

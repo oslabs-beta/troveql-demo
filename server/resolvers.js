@@ -4,7 +4,7 @@ const { getMovies, getMovie } = require('./data');
 const resolvers = {
   // Query: {
       movies: (obj, args, context, info) => getMovies(),
-      movie: (movie_id) => getMovie(movie_id),
+      movie: (args) => getMovie(args.movie_id),
   // }
 };
 
