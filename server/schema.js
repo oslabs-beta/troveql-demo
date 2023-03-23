@@ -21,3 +21,5 @@ const typeDefs = `#graphql
 `;
 
 const schema = buildSchema(typeDefs);
+
+module.exports = { schema };
