@@ -69,7 +69,7 @@ const getMovie = async () => {
       title: 'Harry Potter I'
     }
   });
-  console.log(movie[0].dataValues);
+  // console.log(movie[0].dataValues);
   return movie[0].dataValues;
 }
 
