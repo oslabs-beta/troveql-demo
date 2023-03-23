@@ -106,5 +106,3 @@ const deleteItem = async () => {
 }
 
 // deleteItem();
-
-module.exports = { getMovies, getMovie, updateRating, deleteItem };
