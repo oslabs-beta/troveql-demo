@@ -48,12 +48,11 @@ const User = require('../database/models/userModel');
 //   })
 
 
-
 // Getting all movies
 const getMovies = async () => {
-  const data = await Movie.findAll();
+  const movies = await Movie.findAll();
   const allMovies = [];
-  data.forEach(movie => {
+  movies.forEach(movie => {
     allMovies.push(movie.dataValues);
   })
   // console.log(allMovies);
@@ -64,70 +63,48 @@ const getMovies = async () => {
 
 
 // Getting a movie's detail
-const getMovie = async () => {
-  const movie = await Movie.findAll({
+const getMovie = async (movie_id) => {
+  const movie = await Movie.findOne({
     where: {
-      title: 'Harry Potter I'
+      movie_id
     }
   });
-  // console.log(movie[0].dataValues);
-  return movie[0].dataValues;
+  // console.log(movie);
+  // console.log(movie.dataValues);
+  return [movie.dataValues];
 }
 
 // getMovie();
 
 
 
-// Getting a user's movie list
-const getUserMovies = async () => {
-  const data = await User.findAll({
-    where: {username: 'lunabar'},
-    include: [{
-      model: Movie,
-    }]
-  });
-  const userMovies = {};
-  userMovies.username = data[0].dataValues.username;
-  const favList = [];
-  data.forEach(item => {
-    item.dataValues.movie.dataValues.rating = item.rating;
-    favList.push(item.dataValues.movie.dataValues);
-  });
-  userMovies.movie = favList;
-  // console.log(userMovies);
-  return userMovies;
-}
-
-// getUserMovies();
-
-
 // Updating ratings of a movie from a user
-// const updateRating = async () => {
-//   const rate = await User.update({rating: 95}, {
-//     where: {
-//       username: 'oreo',
-//       movie_id: 2,
-//     }
-//   });
-//   console.log(rate);
-//   return;
-// }
+const updateRating = async () => {
+  const rate = await User.update({rating: 95}, {
+    where: {
+      username: 'oreo',
+      movie_id: 2,
+    }
+  });
+  console.log(rate);
+  return;
+}
 
 // updateRating();
 
 
 // Deleting a movie from a user's movie list 
-// const deleteItem = async () => {
-//   const itemDestroyed = await User.destroy({
-//     where: {
-//       username: 'oreo',
-//       movie_id: 3,
-//     }
-//   });
-//   console.log(itemDestroyed);
-//   return;
-// }
+const deleteItem = async () => {
+  const itemDestroyed = await User.destroy({
+    where: {
+      username: 'oreo',
+      movie_id: 3,
+    }
+  });
+  console.log(itemDestroyed);
+  return;
+}
 
 // deleteItem();
 
-module.exports = { getMovies, getMovie, getUserMovies };
+module.exports = { getMovies, getMovie, updateRating, deleteItem };

@@ -10,21 +10,13 @@ const typeDefs = `#graphql
     title: String!
     vote_average: Float
     vote_count: Int
-    rating: Int!
-  }
-
-  # "User" is a type that lets clients query a specific user's movielist
-  type User {
-    username: String!
-    movie: [Movie]!
   }
 
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
   # The "movie" query returns an array of zero or more Movie objects
-  # The "user" query returns object with username and a movie list array with zero or more Movie Objects
   type Query {
-    movies: [Movie!]!
-    favlist: User
+    movies: [Movie]!
+    movie(movie_id: Int!): [Movie]!
   }
 `;
 

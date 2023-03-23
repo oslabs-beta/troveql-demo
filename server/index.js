@@ -9,10 +9,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// // add middleware function for use of TroveQL cache
-// app.use('/', 
-//   (req, res) => res.status(200).send('Welcome to the Express Server!')
-// );
+// The TroveQLCache middleware function requires 2 arguments:
+// (1) persistence value for the cache
+// (2) your server's graphQL URL endpoint
+const { TroveQLCache } = require('troveql');
+const cache = new TroveQLCache(3000, 'http://localhost:4000/graphql');
+app.use('/troveql', 
+  cache.queryCache,
+  (req, res) => res.status(200).json(res.locals.value)
+);
 
 const { schema } = require('./schema');
 const { resolvers } = require('./resolvers');
@@ -24,11 +29,6 @@ app.use('/graphql',
     // context: {},
     graphiql: true
   })
-);
-
-// add middleware function for use of TroveQL cache
-app.use('/', 
-  (req, res) => res.status(200).json('Welcome to the Express Server!')
 );
 
 app.listen(PORT, () => console.log(`Express Server ready at http://localhost:${PORT}`));
