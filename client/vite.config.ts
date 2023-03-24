@@ -15,7 +15,7 @@ export default defineConfig({
   server: {
     port: 8080,
     proxy: {
-      '/api': 'http://localhost:4000',
+      '/troveql': 'http://localhost:4000/troveql',
     }
   }
 })

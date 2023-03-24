@@ -1,29 +1,22 @@
 const queries = {
-  query1:
-    `query
-        {movies 
-          {
+  getMovies:
+    `query {
+        movies {
             movie_id
             title
             vote_average
             vote_count
-          }
-        }
-      `,
-  query2: 
-    `query
-      { 
-        favlist 
-        {
-          username
-          movie 
-          {
-              title
-              rating
-          }
         }
       }
-    `
+    `,
+    
+  getMovieDetails: 
+    `query {
+      movie(movie_id: 101) {
+          movie_id
+          title
+      }
+  }`
 }
 
 export default queries
