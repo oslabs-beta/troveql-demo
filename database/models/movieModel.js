@@ -12,30 +12,23 @@ const Movie = sequelize.define("movie", {
     primaryKey: true,
   },
 
-  movie_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-
   title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 
-  vote_average: {
-    type: DataTypes.DECIMAL(4, 2),
+  genre: {
+    type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: 0,
   },
 
-  vote_count: {
+  year: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    defaultValue: 0,
   },
 });
 
-// call sync method on model to create/update table
+// UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
 // Movie
 //   .sync()
 //   .then(() => {
