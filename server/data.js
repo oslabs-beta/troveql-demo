@@ -67,7 +67,7 @@ const getMovies = async () => {
   return allMovies;
 }
 
-getMovies();
+// getMovies();
 
 
 // Getting a movie's detail

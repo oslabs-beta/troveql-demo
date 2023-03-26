@@ -34,9 +34,9 @@ function MovieDisplay(props) {
 
   props.movies.forEach(movie => {
     movieList.push(
-      <li key={movie.movie_id}>
+      <li key={movie.id}>
         {movie.title}
-        <button id={movie.movie_id} onClick={getDetails}>Get Details</button>
+        <button id={movie.id} onClick={getDetails}>Get Details</button>
       </li>
     )
   })
