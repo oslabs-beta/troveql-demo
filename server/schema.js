@@ -9,6 +9,7 @@ const typeDefs = `#graphql
     title: String!
     genre: String
     year: Int
+    actors: [Actor]
   }
 
   type Actor {
@@ -21,8 +22,10 @@ const typeDefs = `#graphql
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
   # The "movie" query returns an array of zero or more Movie objects
   type Query {
-    movies: [Movie]!
-    movie(id: ID!): [Movie]
+    movies: [Movie]
+    movie(id: ID!): Movie
+    actors: [Actor]
+    actor(id: ID!): Actor
   }
 `;
 

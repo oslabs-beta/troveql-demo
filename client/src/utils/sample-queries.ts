@@ -12,7 +12,7 @@ const queries = {
     
   getMovieDetails: 
     `query {
-      movie(id: "2") {
+      movie(id: "3") {
           id
           title
           genre

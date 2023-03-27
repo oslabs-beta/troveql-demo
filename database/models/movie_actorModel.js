@@ -39,4 +39,4 @@ ActorinMovies.belongsTo(Actor, {foreignKey: 'actor_id'});
 //     console.log("ActorinMovies Model synced");
 //   })
 
-module.exports = Movies;
+module.exports = ActorinMovies;

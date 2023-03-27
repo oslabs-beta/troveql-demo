@@ -14,7 +14,7 @@ const Actor = sequelize.define("actor", {
     primaryKey: true,
   },
 
-  movie: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false
   },

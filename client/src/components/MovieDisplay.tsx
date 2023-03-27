@@ -30,8 +30,8 @@ function MovieDisplay(props) {
       }
     })
     .then(data => {
-      console.log('data', data);
-      const detailObj = data.data.movie[0];
+      // console.log('data', data);
+      const detailObj = data.data.movie;
       const detailArr: JSX.Element[] = [];
       for (const key in detailObj) {
         detailArr.push(

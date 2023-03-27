@@ -11,6 +11,7 @@
 
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
+const movieActors = require('../database/models/movie_actorModel');
 
 // Creating new instances of movies to PostgreSQL
 const testMovies = [
@@ -56,6 +57,22 @@ const testActors = [
 //   })
 
 
+const testMA = [
+  {movie_id: 7, actor_id: 1},  
+  {movie_id: 9, actor_id: 2},
+  {movie_id: 9, actor_id: 3},
+];
+
+// UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS
+// movieActors.bulkCreate(testMA)
+//   .then(() => {
+//     console.log('join table data created successfully');
+//   })
+//   .catch((error) => {
+//     console.error('Error creating actors in join table', error);
+//   })
+
+
 // Getting all movies
 const getMovies = async () => {
   try {
@@ -64,7 +81,7 @@ const getMovies = async () => {
     movies.forEach(movie => {
       allMovies.push(movie.dataValues);
     })
-    // console.log(allMovies);
+    console.log(allMovies);
     return allMovies;
   } catch (error) {
     console.error(error);
@@ -85,14 +102,38 @@ const getMovie = async (id) => {
     });
     // console.log(movie);
     console.log('singleMovie', movie.dataValues);
-    return [movie.dataValues];
+    return movie.dataValues;
   } catch (error) {
     console.error(error);
     return;
   }
 }
 
-getMovie("3");
+// getMovie(3);
+
+
+// Getting all actors
+const getActors = async () => {
+  try {
+    const actors = await Actor.findAll(
+      // include: [
+      //   model: movieActors,
+      //   attibutes: ['']
+      // ]
+    );
+    const allActors = [];
+    actors.forEach(actor => {
+      allActors.push(actor.dataValues);
+    })
+    console.log(allActors);
+    return allActors;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+}
+
+// getActors();
 
 
 
@@ -125,4 +166,4 @@ const deleteItem = async () => {
 
 // deleteItem();
 
-module.exports = { getMovies, getMovie, updateRating, deleteItem };
+module.exports = { getMovies, getMovie, getActors };
