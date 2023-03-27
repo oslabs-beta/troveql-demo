@@ -12,9 +12,11 @@ const queries = {
     
   getMovieDetails: 
     `query {
-      movie(movie_id: 101) {
-          movie_id
+      movie(id: "2") {
+          id
           title
+          genre
+          year
       }
   }`
 }

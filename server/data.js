@@ -58,31 +58,41 @@ const testActors = [
 
 // Getting all movies
 const getMovies = async () => {
-  const movies = await Movie.findAll();
-  const allMovies = [];
-  movies.forEach(movie => {
-    allMovies.push(movie.dataValues);
-  })
-  // console.log(allMovies);
-  return allMovies;
+  try {
+    const movies = await Movie.findAll();
+    const allMovies = [];
+    movies.forEach(movie => {
+      allMovies.push(movie.dataValues);
+    })
+    // console.log(allMovies);
+    return allMovies;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }
 
 // getMovies();
 
 
 // Getting a movie's detail
-const getMovie = async (movie_id) => {
-  const movie = await Movie.findOne({
-    where: {
-      movie_id
-    }
-  });
-  // console.log(movie);
-  // console.log(movie.dataValues);
-  return [movie.dataValues];
+const getMovie = async (id) => {
+  try {
+    const movie = await Movie.findOne({
+      where: {
+        id: id
+      }
+    });
+    // console.log(movie);
+    console.log('singleMovie', movie.dataValues);
+    return [movie.dataValues];
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }
 
-// getMovie();
+getMovie("3");
 
 
 

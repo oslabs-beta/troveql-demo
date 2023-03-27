@@ -5,11 +5,14 @@ const resolvers = {
   // Query: {
       movies: (obj, args, context, info) => {
         console.log('inside movie(s) query');
-        return getMovies()
+        return getMovies();
       },
-      movie: (args) => {
+      movie: async (obj, args, context, info) => {
         console.log('inside movie query');
-        return getMovie(args.movie_id)
+        // console.log('args', args);
+        const result = await getMovie(2);
+        console.log('result', result);
+        return result;
       },
   // }
 };

@@ -11,11 +11,18 @@ const typeDefs = `#graphql
     year: Int
   }
 
+  type Actor {
+    id: ID
+    name: String!
+    gender: String
+    place_of_birth: String
+  }
+
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
   # The "movie" query returns an array of zero or more Movie objects
   type Query {
     movies: [Movie]!
-    movie(movie_id: Int!): [Movie]!
+    movie(id: ID!): [Movie]
   }
 `;
 
