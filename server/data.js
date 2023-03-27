@@ -10,18 +10,24 @@
 
 
 const Movie = require('../database/models/movieModel');
-const User = require('../database/models/userModel');
+const Actor = require('../database/models/actorModel');
+const movieActors = require('../database/models/movie_actorModel');
 
 // Creating new instances of movies to PostgreSQL
-// const testMovies = [
-//   {movie_id: 101, title: 'Titanic', vote_count: 1000},
-//   {movie_id: 102, title: 'Jurassic Park', vote_count: 1000},
-//   {movie_id: 103, title: 'Harry Potter I', vote_count: 3000},
-//   {movie_id: 104, title: 'Harry Potter II', vote_count: 4000},
-//   {movie_id: 105, title: 'Harry Potter III'},
-//   {movie_id: 106, title: 'Harry Potter IV'},
-// ];
+const testMovies = [
+  {title: 'Pulp Fiction', genre: 'Crime', year: 1994},
+  {title: 'The Godfather', genre: 'Drama' , year: 1972},
+  {title: 'The Dark Knight', genre: 'Action', year: 2008},
+  {title: 'Pulp Fiction', genre: 'Crime', year: 1994},
+  {title: 'The Lord of the Rings', genre: 'Fantasy', year: 2003},
+  {title: 'The Matrix', genre: 'Action', year: 1999},
+  {title: 'Forrest Gump', genre: 'Drama', year: 1994},
+  {title: 'Star Wars', genre: 'Fiction', year: 1977},
+  {title: 'Titanic', genre: 'Romance', year: 1997},
+  {title: 'Jurassic Park', genre: 'Adventure', year: 1993},
+];
 
+// UNCOMMENT THE FOLLOWING CODES TO CREATE MOVIES
 // Movie.bulkCreate(testMovies)
 //   .then(() => {
 //     console.log('Movies created successfully');
@@ -30,51 +36,104 @@ const User = require('../database/models/userModel');
 //     console.error('Error creating movies', error);
 //   })
 
-// Creating new instances of users to PostgreSQL
-// const testUsers = [
-//   {movie_id: 1, rating: 65, username: 'penelope'},
-//   {movie_id: 2, rating: 34, username: 'oreo'},
-//   {movie_id: 1, rating: 90, username: 'lunabar'},
-//   {movie_id: 3, rating: 55, username: 'oreo'},
-//   {movie_id: 4, rating: 80, username: 'lunabar'},
-// ];
+// Creating new instances of actors to PostgreSQL
+const testActors = [
+  {name: "Tom Hanks", gender: "Male", place_of_birth: "USA"},
+  {name: "Leonardo DiCaprio", gender: "Male", place_of_birth: "USA"},
+  {name: "Kate Winslet", gender: "Female", place_of_birth: "USA"},
+  {name: "Morgan Freeman", gender: "Male", place_of_birth: "USA"},
+  {name: "Cate Blanchett", gender: "Male", place_of_birth: "USA"},
+  {name: "Uma Thurman", gender: "Female", place_of_birth: "USA"},
+  {name: "Carrie-Anne Moss", gender: "Female", place_of_birth: "Canada"}
+];
 
-// User.bulkCreate(testUsers)
+// UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS
+// Actor.bulkCreate(testActors)
 //   .then(() => {
-//     console.log('Users created successfully');
+//     console.log('Actors created successfully');
 //   })
 //   .catch((error) => {
-//     console.error('Error creating users', error);
+//     console.error('Error creating actors', error);
+//   })
+
+
+const testMA = [
+  {movie_id: 7, actor_id: 1},  
+  {movie_id: 9, actor_id: 2},
+  {movie_id: 9, actor_id: 3},
+];
+
+// UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS
+// movieActors.bulkCreate(testMA)
+//   .then(() => {
+//     console.log('join table data created successfully');
+//   })
+//   .catch((error) => {
+//     console.error('Error creating actors in join table', error);
 //   })
 
 
 // Getting all movies
 const getMovies = async () => {
-  const movies = await Movie.findAll();
-  const allMovies = [];
-  movies.forEach(movie => {
-    allMovies.push(movie.dataValues);
-  })
-  // console.log(allMovies);
-  return allMovies;
+  try {
+    const movies = await Movie.findAll();
+    const allMovies = [];
+    movies.forEach(movie => {
+      allMovies.push(movie.dataValues);
+    })
+    console.log(allMovies);
+    return allMovies;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }
 
 // getMovies();
 
 
 // Getting a movie's detail
-const getMovie = async (movie_id) => {
-  const movie = await Movie.findOne({
-    where: {
-      movie_id
-    }
-  });
-  // console.log(movie);
-  // console.log(movie.dataValues);
-  return [movie.dataValues];
+const getMovie = async (id) => {
+  try {
+    const movie = await Movie.findOne({
+      where: {
+        id: id
+      }
+    });
+    // console.log(movie);
+    console.log('singleMovie', movie.dataValues);
+    return movie.dataValues;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }
 
-// getMovie();
+// getMovie(3);
+
+
+// Getting all actors
+const getActors = async () => {
+  try {
+    const actors = await Actor.findAll(
+      // include: [
+      //   model: movieActors,
+      //   attibutes: ['']
+      // ]
+    );
+    const allActors = [];
+    actors.forEach(actor => {
+      allActors.push(actor.dataValues);
+    })
+    console.log(allActors);
+    return allActors;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+}
+
+// getActors();
 
 
 
@@ -107,4 +166,4 @@ const deleteItem = async () => {
 
 // deleteItem();
 
-module.exports = { getMovies, getMovie, updateRating, deleteItem };
+module.exports = { getMovies, getMovie, getActors };

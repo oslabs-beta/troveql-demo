@@ -2,19 +2,21 @@ const queries = {
   getMovies:
     `query {
         movies {
-            movie_id
+            id
             title
-            vote_average
-            vote_count
+            genre
+            year
         }
       }
     `,
     
   getMovieDetails: 
     `query {
-      movie(movie_id: 101) {
-          movie_id
+      movie(id: "3") {
+          id
           title
+          genre
+          year
       }
   }`
 }

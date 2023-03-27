@@ -2,41 +2,56 @@ import React from "react";
 import queries from '../utils/sample-queries';
 
 function MovieDisplay(props) {
-  let movieList = [];
-  const [movieDetails, setMovieDetails] = React.useState([]);
+  let movieList: [] = [];
+  // let movieDetails;{{
+  const [movieDetails, setMovieDetails] = React.useState<JSX.Element[]>([]);
   // console.log(props.movies)
 
-  function getDetails (event) {
+  function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
     const query = queries.getMovieDetails;
-    // const variables = { movie_id: 101 };
+    // const id = Number(event.currentTarget.id);
+    // console.log(id);
+    // const variables = { id };
+    // console.log(variables);
     fetch('/troveql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        query,
+        query: query
         // variables
       })
     })
-    .then(response => response.json())
+    .then(response => {
+      console.log('res', response);
+      if (response.status === 200) {
+        return response.json();
+      }
+    })
     .then(data => {
-      // console.log(data);
-      const movieTitle = [];
-      movieTitle.push(
-        <p>{data.data.movie[0].title}</p>
-      )
-      setMovieDetails(movieTitle);
-      console.log(data.data.movie[0]);
+      // console.log('data', data);
+      const detailObj = data.data.movie;
+      const detailArr: JSX.Element[] = [];
+      for (const key in detailObj) {
+        detailArr.push(
+            <p>{key}: {detailObj[key]}</p>
+        )
+      }
+      // console.log(movieDetails);
+      // const movieID = detailObj;
+      // console.log('details', movieDetails)
+      setMovieDetails(detailArr);
+      return;
       })
     .catch(err => console.log(err));
   }
 
   props.movies.forEach(movie => {
     movieList.push(
-      <li key={movie.movie_id}>
+      <li key={movie.id}>
         {movie.title}
-        <button id={movie.movie_id} onClick={getDetails}>Get Details</button>
+        <button id={movie.id} onClick={getDetails}>Get Details</button>
       </li>
     )
   })

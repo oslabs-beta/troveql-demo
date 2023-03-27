@@ -2,9 +2,11 @@
 const sequelize  = require('../db_connect');
 // import Constructors for model creation
 const { DataTypes } = require('sequelize');
+// import movieModel to associate foreign key
+const Movie = require('./movieModel');
 
-// create Movie model
-const Movie = sequelize.define("movie", {
+// create Actor model
+const Actor = sequelize.define("actor", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -12,27 +14,27 @@ const Movie = sequelize.define("movie", {
     primaryKey: true,
   },
 
-  title: {
+  name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
 
-  genre: {
+  gender: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 
-  year: {
-    type: DataTypes.INTEGER,
+  place_of_birth: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
 });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Movie
+// Actor
 //   .sync()
 //   .then(() => {
-//     console.log("Movie Model synced");
+//     console.log("Actor Model synced");
 //   })
 
-module.exports = Movie;
+module.exports = Actor;

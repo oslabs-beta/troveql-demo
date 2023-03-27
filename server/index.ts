@@ -30,8 +30,8 @@ app.use('/troveql',
   (req: Request, res: Response) => res.status(200).json(res.locals.value)
 );
 
-import { schema } from './schema';
-import { resolvers } from './resolvers';
+const { schema } = require('./schema');
+const { resolvers } = require('./resolvers');
 
 app.use('/graphql', 
   graphqlHTTP({
@@ -45,7 +45,7 @@ app.use('/graphql',
 app.use('/', (err: ServerError, req: Request, res: Response, next: NextFunction) => {
   const defaultErr: ServerError = {
     log: 'Express error handler caught unknown middleware error',
-    status: 500,
+    status: 400,
     message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);

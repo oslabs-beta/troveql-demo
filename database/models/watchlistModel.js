@@ -5,8 +5,8 @@ const { DataTypes } = require('sequelize');
 // import movieModel to associate foreign key
 const Movie = require('./movieModel');
 
-// create Movie model
-const User = sequelize.define("user", {
+// create Watchlist model
+const Watchlist = sequelize.define("watchlist", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -16,29 +16,24 @@ const User = sequelize.define("user", {
 
   movie_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: false
   },
 
-  rating: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    defaultValue: 0,
-  },
-
-  username: {
-    type: DataTypes.STRING,
+  watched: {
+    type: DataTypes.BOOLEAN,
     allowNull: false,
-  },
+    defaultValue: false
+  }
 });
 
 // associate movie_id with movieModel's movie_id
-User.belongsTo(Movie, {foreignKey: 'movie_id'});
+Watchlist.belongsTo(Movie, {foreignKey: 'movie_id'});
 
-// call sync method on model to create/update table
-User
-  .sync()
-  .then(() => {
-    console.log("User Model synced");
-  })
+// UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
+// Watchlist
+//   .sync()
+//   .then(() => {
+//     console.log("Watchlist Model synced");
+//   })
 
-module.exports = User;
+module.exports = Watchlist;

@@ -1,4 +1,4 @@
-{
+{ 
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "watch": true
   },
   "include": ["index.ts"]
 }
