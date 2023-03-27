@@ -17,6 +17,7 @@ const typeDefs = `#graphql
     name: String!
     gender: String
     place_of_birth: String
+    movies: [Movie]
   }
 
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each

@@ -3,10 +3,10 @@ import queries from '../utils/sample-queries';
 
 function MovieDisplay(props) {
   let movieList: [] = [];
-  // let movieDetails;{{
   const [movieDetails, setMovieDetails] = React.useState<JSX.Element[]>([]);
-  // console.log(props.movies)
+  // console.log('movies', props.movies);
 
+  // Get movie details
   function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
     const query = queries.getMovieDetails;
     // const id = Number(event.currentTarget.id);
@@ -24,7 +24,6 @@ function MovieDisplay(props) {
       })
     })
     .then(response => {
-      console.log('res', response);
       if (response.status === 200) {
         return response.json();
       }
@@ -47,24 +46,42 @@ function MovieDisplay(props) {
     .catch(err => console.log(err));
   }
 
+  // Display all movies
   props.movies.forEach(movie => {
+   let actorList: string[] = [];
+   if (movie.actors.length) {
+    for (let i = 0; i < movie.actors.length - 1; i++) {
+      actorList.push(<span>{movie.actors[i].name} | </span>);
+    };
+    actorList.push(<span>{movie.actors[movie.actors.length - 1].name}</span>);
     movieList.push(
       <li key={movie.id}>
         {movie.title}
         <button id={movie.id} onClick={getDetails}>Get Details</button>
+        <span>actors: {actorList}</span>
       </li>
     )
+   } else {
+     movieList.push(
+       <li key={movie.id}>
+         {movie.title}
+         <button id={movie.id} onClick={getDetails}>Get Details</button>
+       </li>
+     )
+   }
   })
 
   return (
-    <>
-      <ul>
-        {movieList}
-      </ul>
+    <div className="main-wrapper">
+      <div>
+        <ul>
+          {movieList}
+        </ul>
+      </div>
       <div>
         {movieDetails}
       </div>
-    </>
+    </div>
   )
 }
 

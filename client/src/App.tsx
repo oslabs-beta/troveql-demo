@@ -6,7 +6,7 @@ import queries from './utils/sample-queries'
 
 
 function App() {
-  const [movies, changeMovies] = useState([])
+  const [movies, changeMovies] = useState([]);
 
   function handleClicks(e: React.MouseEvent<HTMLButtonElement>) {
     const query = queries[e.target.id];

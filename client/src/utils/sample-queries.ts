@@ -6,6 +6,10 @@ const queries = {
             title
             genre
             year
+            actors
+              {
+                name
+              }
         }
       }
     `,

@@ -2,7 +2,7 @@ const { getMovies, getMovie, getActors } = require('./data');
 
 // Resolvers describe what the server returns to the client for a specific query
 const resolvers = {
-  // Query: {
+  Query: {
       movies: () => getMovies(),
       movie: async (obj, { id }, context, info) => {
         console.log('inside movie query');
@@ -12,7 +12,7 @@ const resolvers = {
         return result;
       },
       actors: () => getActors(),
-  // },
+  },
   // Movie: {
   //   actors: async (obj) => {
   //     console.log('inside movie and actors query');

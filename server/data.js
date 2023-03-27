@@ -197,7 +197,7 @@ const getActors = async () => {
         model: Movie,
         through: {
           model: ActorinMovies,
-          attributes: ['id']
+          attributes: ['movie_id']
         },
         required: false,
       }]
@@ -209,6 +209,9 @@ const getActors = async () => {
       const arrayOfMovies = actor.dataValues.movies;
       arrayOfMovies.forEach(movie => movieList.push(movie.dataValues));
       actor.dataValues.movies = movieList;
+      // add a key as movie_id
+      if (movieList.length) actor.dataValues.movie_id = movieList[0].id
+      else {actor.dataValues.movie_id = null}
       // push actor.dataValues object to allActors
       allActors.push(actor.dataValues);
     })
@@ -220,7 +223,7 @@ const getActors = async () => {
   }
 }
 
-// getActors();
+getActors();
 
 
 
