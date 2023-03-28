@@ -1,10 +1,11 @@
 import React from "react";
 import queries from '../utils/sample-queries';
-import { Movie, MovieDisplayProps } from '../utils/types';
+import { Movie, MovieDisplayProps} from '../utils/types';
 
 function MovieDisplay(props: MovieDisplayProps) {
   const [movieDetails, setMovieDetails] = React.useState<JSX.Element[]>([]);
 
+  // Get movie details
   function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
     const query: string = queries.getMovieDetails;
     const variables = { id: Number(event.currentTarget.id) };
@@ -22,10 +23,27 @@ function MovieDisplay(props: MovieDisplayProps) {
     .then(data => {
       const detailObj = data.data.movie;
       const detailArr: JSX.Element[] = [];
-      for (const key in detailObj) {
-        detailArr.push(
-          <p key={key}>{key}: {detailObj[key]}</p>
-        )
+      // if actor list doesn't exist, remove key from movie details
+      // if actor list exists, create JSX element for each actor, push it to actorList arr and reassign movie actors key with actorList arr
+      if (!detailObj.actors.length) {
+        delete detailObj.actors;
+        for (const key in detailObj) {
+          detailArr.push(
+            <p key={key}>{key}: {detailObj[key]}</p>
+          )
+        }
+      } else {
+        let actorList: string[] = [];
+        for (let i = 0; i < detailObj.actors.length - 1; i++) {
+          actorList.push(<span>{detailObj.actors[i].name} | </span>);
+        };
+        actorList.push(<span>{detailObj.actors[detailObj.actors.length - 1].name}</span>);
+        detailObj.actors = actorList;
+        for (const key in detailObj) {
+          detailArr.push(
+            <p key={key}>{key}: {detailObj[key]}</p>
+          )
+        }
       }
       setMovieDetails(detailArr);
       return;
@@ -33,25 +51,29 @@ function MovieDisplay(props: MovieDisplayProps) {
     .catch(err => console.log(err));
   }
 
-  let movieList: JSX.Element[] = [];
-  props.movies.forEach((movie: Movie) => {
-    movieList.push(
-      <li key={movie.id}>
-        {movie.title}
-        <button id={String(movie.id)} onClick={getDetails}>Get Details</button>
-      </li>
-    )
-  })
+
+  let movieList: [] = [];
+  // Display all movies
+  props.movies.forEach(movie => {
+      movieList.push(
+        <li key={movie.id}>
+          {movie.title}
+          <button id={movie.id} onClick={getDetails}>Get Details</button>
+        </li>
+      )
+   })
 
   return (
-    <>
-      <ul>
-        {movieList}
-      </ul>
+    <div className="main-wrapper">
+      <div>
+        <ul>
+          {movieList}
+        </ul>
+      </div>
       <div className="movie-details">
         {movieDetails}
       </div>
-    </>
+    </div>
   )
 }
 

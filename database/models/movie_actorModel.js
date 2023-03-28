@@ -31,6 +31,9 @@ const ActorinMovies = sequelize.define("movie_actor", {
 ActorinMovies.belongsTo(Movie, {foreignKey: 'movie_id'});
 ActorinMovies.belongsTo(Actor, {foreignKey: 'actor_id'});
 
+// create many to many connections to associate join table with movie table and actor table
+Actor.belongsToMany(Movie, { through: ActorinMovies, foreignKey: 'actor_id' });
+Movie.belongsToMany(Actor, { through: ActorinMovies, foreignKey: 'movie_id' });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
 // ActorinMovies

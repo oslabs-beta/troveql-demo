@@ -6,10 +6,12 @@ const queries: Query = {
         movies {
             id
             title
-            genre
-            year
+            actors 
+            {
+              name
+            }
         }
-      }
+    }
     `,
   getMovieDetails: 
     `query ($id: ID) {
@@ -18,6 +20,10 @@ const queries: Query = {
           title
           genre
           year
+          actors 
+            {
+              name
+            }
       }
     }`
 }
