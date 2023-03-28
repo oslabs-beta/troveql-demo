@@ -33,6 +33,8 @@ function MovieDisplay(props: MovieDisplayProps) {
     })
     .catch(err => console.log(err));
   }
+
+
   let movieList: [] = [];
   props.movies.forEach(movie => {
     // movieList.push(
