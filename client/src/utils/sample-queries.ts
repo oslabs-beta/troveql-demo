@@ -6,12 +6,10 @@ const queries: Query = {
         movies {
             id
             title
-            genre
-            year
-            actors
-              {
-                name
-              }
+            actors 
+            {
+              name
+            }
         }
     }
     `,
@@ -22,6 +20,10 @@ const queries: Query = {
           title
           genre
           year
+          actors 
+            {
+              name
+            }
       }
     }`
 }

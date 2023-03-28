@@ -8,7 +8,7 @@
 
 // module.exports = { db };
 
-const { Sequelize } = require('sequelize');
+// const { Sequelize } = require('sequelize');
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
 const ActorinMovies = require('../database/models/movie_actorModel');
@@ -258,7 +258,7 @@ const getActorsFromMovieID = async (id) => {
   }
 }
 
-// getActorsFromMovieID(9);
+getActorsFromMovieID(9);
 
 
 // Updating ratings of a movie from a user

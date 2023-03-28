@@ -12,8 +12,10 @@ const resolvers = {
     }
 },
   Movie: {
-    actors: async (obj, args, context, info) => {
-      const result = await getActorsFromMovieID(args.id);
+    actors: async (parent) => {
+      // console.log('parent', parent);
+      const result = await getActorsFromMovieID(parent.id);
+      console.log('result', result);
       return result;
     }
   }
