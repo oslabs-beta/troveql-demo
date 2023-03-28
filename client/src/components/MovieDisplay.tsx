@@ -9,9 +9,9 @@ function MovieDisplay(props) {
   // Get movie details
   function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
     const query = queries.getMovieDetails;
-    // const id = Number(event.currentTarget.id);
+    const id = Number(event.currentTarget.id);
     // console.log(id);
-    // const variables = { id };
+    const variables = { id: id };
     // console.log(variables);
     fetch('/troveql', {
       method: 'POST',
@@ -19,8 +19,8 @@ function MovieDisplay(props) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        query: query
-        // variables
+        query: query,
+        variables: variables
       })
     })
     .then(response => {
@@ -38,7 +38,7 @@ function MovieDisplay(props) {
         )
       }
       // console.log(movieDetails);
-      // const movieID = detailObj;
+      const movieID = detailObj;
       // console.log('details', movieDetails)
       setMovieDetails(detailArr);
       return;

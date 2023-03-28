@@ -11,12 +11,12 @@ const queries = {
                 name
               }
         }
-      }
+    }
     `,
     
   getMovieDetails: 
-    `query {
-      movie(id: "3") {
+    `query ($id: Int) {
+      movie(id: $id) {
           id
           title
           genre

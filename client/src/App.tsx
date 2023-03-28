@@ -15,7 +15,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({query})
+      body: JSON.stringify({query: query})
     })
     .then(response => response.json())
     .then(data => {

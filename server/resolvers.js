@@ -1,26 +1,31 @@
-const { getMovies, getMovie, getActors } = require('./data');
+const { getMovies, getMovie, getActorsFromMovieID } = require('./data');
 
 // Resolvers describe what the server returns to the client for a specific query
 const resolvers = {
   Query: {
-      movies: () => getMovies(),
-      movie: async (obj, { id }, context, info) => {
-        console.log('inside movie query');
-        // console.log('args', args);
-        const result = await getMovie(3);
-        console.log('result', result);
-        return result;
-      },
-      actors: () => getActors(),
+    movies: (parent) => {
+      console.log('inside movie(s) query');
+      return getMovies();
+    },
+    movie: async ({ id }) => {
+      console.log('inside movie query');
+      console.log('args in movie resolver', { id });
+      const result = await getMovie(3);
+      return result;
+    }
+    // actors: async () => {
+    //   // console.log('inside movies query');
+    //   const result = await getActors();
+    //   return result;
+    // },
   },
-  // Movie: {
-  //   actors: async (obj) => {
-  //     console.log('inside movie and actors query');
-  //     const result = await getActors(obj.id);
-  //     // console.log('result', result);
-  //     return result;
-  //   },
-  // }
+  Movie: {
+    actors: async (parent) => {
+      const result = await getActorsFromMovieID(9);
+      // const result = await getActorsFromMovieID(parent.id);
+      return result;
+    }
+  }
 };
 
 module.exports = { resolvers };

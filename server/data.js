@@ -126,7 +126,8 @@ const getMovies = async () => {
       // push movie.dataValues object to allMovies
       allMovies.push(movie.dataValues);
     })
-    console.log(allMovies);
+    // console.log(allMovies);
+    console.log('Got all movies from db')
     return allMovies;
   } catch (error) {
     console.error(error);
@@ -145,8 +146,8 @@ const getMovie = async (id) => {
         id: id
       }
     });
-    // console.log(movie);
-    console.log('singleMovie', movie.dataValues);
+    console.log('Got a movie from db');
+    // console.log('singleMovie', movie.dataValues);
     return movie.dataValues;
   } catch (error) {
     console.error(error);
@@ -202,6 +203,7 @@ const getActors = async () => {
         required: false,
       }]
     });
+    // console.log(actors);
     const allActors = [];
     actors.forEach(actor => {
       // refine actor.dataValues.movies list
@@ -209,13 +211,10 @@ const getActors = async () => {
       const arrayOfMovies = actor.dataValues.movies;
       arrayOfMovies.forEach(movie => movieList.push(movie.dataValues));
       actor.dataValues.movies = movieList;
-      // add a key as movie_id
-      if (movieList.length) actor.dataValues.movie_id = movieList[0].id
-      else {actor.dataValues.movie_id = null}
       // push actor.dataValues object to allActors
       allActors.push(actor.dataValues);
     })
-    // console.log(allActors);
+    console.log(allActors);
     return allActors;
   } catch (error) {
     console.error(error);
@@ -223,37 +222,74 @@ const getActors = async () => {
   }
 }
 
-getActors();
+// getActors();
 
+
+const getActorsFromMovieID = async (id) => {
+  try {
+    const actors = await Actor.findAll({
+      attributes: ['id', 'name', 'gender', 'place_of_birth'],
+      include: [{
+        model: Movie,
+        through: {
+          model: ActorinMovies,
+          where: {
+            movie_id: id,
+          }
+        },
+        required: true,
+      }]
+    });
+    console.log('Got actors for a movie from db');
+    const allActors = [];
+    actors.forEach(actor => {
+      // refine actor.dataValues.movies list
+      const movieList = [];
+      const arrayOfMovies = actor.dataValues.movies;
+      arrayOfMovies.forEach(movie => movieList.push(movie.dataValues));
+      actor.dataValues.movies = movieList;
+      // push actor.dataValues object to allActors
+      allActors.push(actor.dataValues);
+    })
+    return allActors;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+}
+
+// getActorsFromMovieID(9);
 
 
 // Updating ratings of a movie from a user
-const updateRating = async () => {
-  const rate = await User.update({rating: 95}, {
-    where: {
-      username: 'oreo',
-      movie_id: 2,
-    }
-  });
-  console.log(rate);
-  return;
-}
+// const updateRating = async () => {
+//   const rate = await User.update({rating: 95}, {
+//     where: {
+//       username: 'oreo',
+//       movie_id: 2,
+//     }
+//   });
+//   console.log(rate);
+//   return;
+// }
 
 // updateRating();
 
 
 // Deleting a movie from a user's movie list 
-const deleteItem = async () => {
-  const itemDestroyed = await User.destroy({
-    where: {
-      username: 'oreo',
-      movie_id: 3,
-    }
-  });
-  console.log(itemDestroyed);
-  return;
-}
+// const deleteItem = async () => {
+//   const itemDestroyed = await User.destroy({
+//     where: {
+//       username: 'oreo',
+//       movie_id: 3,
+//     }
+//   });
+//   console.log(itemDestroyed);
+//   return;
+// }
 
 // deleteItem();
 
-module.exports = { getMovies, getMovie, getActors };
+module.exports = { getMovies, getMovie, getActorsFromMovieID };
+
+
