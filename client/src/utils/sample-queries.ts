@@ -1,4 +1,6 @@
-const queries = {
+import { Query } from "./types";
+
+const queries: Query = {
   getMovies:
     `query {
         movies {
@@ -13,16 +15,15 @@ const queries = {
         }
     }
     `,
-    
   getMovieDetails: 
-    `query ($id: Int) {
+    `query ($id: ID) {
       movie(id: $id) {
           id
           title
           genre
           year
       }
-  }`
+    }`
 }
 
 export default queries
