@@ -12,7 +12,7 @@ const queries: Query = {
       }
     `,
   getMovieDetails: 
-    `query ($id: Int) {
+    `query ($id: ID) {
       movie(id: $id) {
           id
           title

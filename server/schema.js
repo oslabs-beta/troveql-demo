@@ -6,7 +6,7 @@ const { resolvers } = require('./resolvers');
 const typeDefs = `#graphql
   # "Movie" is a type that lets clients query the API by movie title (required)
   type Movie {
-    id: Int
+    id: ID!
     title: String!
     genre: String
     year: Int
@@ -14,7 +14,7 @@ const typeDefs = `#graphql
   }
 
   type Actor {
-    id: Int
+    id: ID!
     name: String!
     gender: String
     place_of_birth: String
@@ -26,9 +26,9 @@ const typeDefs = `#graphql
   # The "movie" query returns an array of zero or more Movie objects
   type Query {
     movies: [Movie!]!
-    movie(id: Int): Movie!
+    movie(id: ID): Movie!
     actors: [Actor!]!
-    actor(id: Int): Actor!
+    actor(id: ID): Actor!
   }
 `;
 
