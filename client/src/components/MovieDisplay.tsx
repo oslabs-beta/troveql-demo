@@ -1,57 +1,44 @@
 import React from "react";
 import queries from '../utils/sample-queries';
+import { Movie, MovieDisplayProps } from '../utils/types';
 
-function MovieDisplay(props) {
-  let movieList: [] = [];
-  // let movieDetails;{{
+function MovieDisplay(props: MovieDisplayProps) {
   const [movieDetails, setMovieDetails] = React.useState<JSX.Element[]>([]);
-  // console.log(props.movies)
 
   function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
-    const query = queries.getMovieDetails;
-    // const id = Number(event.currentTarget.id);
-    // console.log(id);
-    // const variables = { id };
-    // console.log(variables);
+    const query: string = queries.getMovieDetails;
+    const variables = { id: Number(event.currentTarget.id) };
     fetch('/troveql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        query: query
-        // variables
+        query,
+        variables
       })
     })
-    .then(response => {
-      console.log('res', response);
-      if (response.status === 200) {
-        return response.json();
-      }
-    })
+    .then(response => response.json())
     .then(data => {
-      // console.log('data', data);
       const detailObj = data.data.movie;
       const detailArr: JSX.Element[] = [];
       for (const key in detailObj) {
         detailArr.push(
-            <p>{key}: {detailObj[key]}</p>
+          <p key={key}>{key}: {detailObj[key]}</p>
         )
       }
-      // console.log(movieDetails);
-      // const movieID = detailObj;
-      // console.log('details', movieDetails)
       setMovieDetails(detailArr);
       return;
-      })
+    })
     .catch(err => console.log(err));
   }
 
-  props.movies.forEach(movie => {
+  let movieList: JSX.Element[] = [];
+  props.movies.forEach((movie: Movie) => {
     movieList.push(
       <li key={movie.id}>
         {movie.title}
-        <button id={movie.id} onClick={getDetails}>Get Details</button>
+        <button id={String(movie.id)} onClick={getDetails}>Get Details</button>
       </li>
     )
   })
@@ -61,11 +48,11 @@ function MovieDisplay(props) {
       <ul>
         {movieList}
       </ul>
-      <div>
+      <div className="movie-details">
         {movieDetails}
       </div>
     </>
   )
 }
 
-export default MovieDisplay
+export default MovieDisplay;
