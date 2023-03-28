@@ -38,7 +38,6 @@ function MovieDisplay(props: MovieDisplayProps) {
           actorList.push(<span>{detailObj.actors[i].name} | </span>);
         };
         actorList.push(<span>{detailObj.actors[detailObj.actors.length - 1].name}</span>);
-        console.log('list', actorList);
         detailObj.actors = actorList;
         for (const key in detailObj) {
           detailArr.push(
