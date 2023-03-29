@@ -21,10 +21,10 @@ type ServerError = {
 
 
 // The TroveQLCache middleware function requires 2 arguments:
-// (1) persistence value for the cache
+// (1) size for the cache
 // (2) your server's graphQL URL endpoint
 const { TroveQLCache } = require('troveql');
-const cache = new TroveQLCache(3000, 'http://localhost:4000/graphql');
+const cache = new TroveQLCache(5, 'http://localhost:4000/graphql');
 app.use('/troveql', 
   cache.queryCache,
   (req: Request, res: Response) => res.status(200).json(res.locals.value)

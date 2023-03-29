@@ -13,20 +13,20 @@ app.use(express.urlencoded({ extended: true }));
 // (1) persistence value for the cache
 // (2) your server's graphQL URL endpoint
 var TroveQLCache = require('troveql').TroveQLCache;
-var cache = new TroveQLCache(3000, 'http://localhost:4000/graphql');
+var cache = new TroveQLCache(5, 'http://localhost:4000/graphql');
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });
-var schema_1 = require("./schema");
-var resolvers_1 = require("./resolvers");
+var schema = require('./schema').schema;
+var resolvers = require('./resolvers').resolvers;
 app.use('/graphql', graphqlHTTP({
-    schema: schema_1.schema,
-    rootValue: resolvers_1.resolvers,
+    schema: schema,
+    rootValue: resolvers,
     // context: {},
     graphiql: true
 }));
 app.use('/', function (err, req, res, next) {
     var defaultErr = {
         log: 'Express error handler caught unknown middleware error',
-        status: 500,
+        status: 400,
         message: { err: 'An error occurred' },
     };
     var errorObj = Object.assign({}, defaultErr, err);
