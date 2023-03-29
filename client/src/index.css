@@ -48,6 +48,9 @@ body {
 }
 
 .movie-details {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
   background-color:#1a1a1a;
   margin: 2em 2em 0 4em;
   border-radius: 5%;
@@ -56,6 +59,7 @@ body {
 .movie-details p {
   /* align-self: center; */
   margin: 2em;
+  color: white;
 }
 
 
