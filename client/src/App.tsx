@@ -1,7 +1,8 @@
 import './App.css'
-import { Route, Routes, useNavigate } from "react-router-dom";
-import MovieDisplay from './components/MovieDisplay';
-import Home from './components/Home';
+import { Route, Routes } from "react-router-dom"
+import Home from './components/Home'
+import MovieDisplay from './components/MovieDisplay'
+import AddMovie from './components/AddMovie'
 import MovieDetails from './components/MovieDetails'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<MovieDisplay />} />
           <Route path="/movies/movie" element={<MovieDetails />} />
+          <Route path="/addmovie" element={<AddMovie />} />
         </Routes>
     </div>
   )

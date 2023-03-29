@@ -10,6 +10,10 @@ const resolvers = {
       const result = await getMovie(args.id);
       return result;
     }
+    addmovie: async (args) => {
+      const result = await addMovie(args.title);
+      return;
+    }
 },
   Movie: {
     actors: async (parent) => {

@@ -21,6 +21,14 @@ const typeDefs = `#graphql
     movies: [Movie]
   }
 
+  type MovieInput {
+    title: String!
+  }
+
+  type Mutation {
+    createMovie(input: MovieInput): Movie
+  }
+
   # The "Query" type lists all the ways clients can query the GraphQL API and the return type for each
   # The "movie" query returns an array of zero or more Movie objects
   type Query {

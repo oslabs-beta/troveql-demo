@@ -1,14 +1,3 @@
-// const db = {
-//   movies: [
-//   { title: 'Titanic', director: 'James Cameron' },
-//   { title: 'Jurassic Park', director: 'Steven Spielberg' },
-//   { title: 'Harry Potter', director: 'Chris Columbus' },
-//   ],
-// };
-
-// module.exports = { db };
-
-// const { Sequelize } = require('sequelize');
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
 const ActorinMovies = require('../database/models/movie_actorModel');
@@ -260,6 +249,20 @@ const getActorsFromMovieID = async (id) => {
 // getActorsFromMovieID(9);
 
 
+// Adding a movie to movie list
+const addMovie = async (title) => {
+  const addMovie = await Movie.create({
+    title: title,
+  });
+  console.log('addMovie', addMovie);
+  return;
+}
+
+addMovie('test');
+
+
+
+
 // Updating ratings of a movie from a user
 // const updateRating = async () => {
 //   const rate = await User.update({rating: 95}, {
@@ -276,18 +279,17 @@ const getActorsFromMovieID = async (id) => {
 
 
 // Deleting a movie from a user's movie list 
-// const deleteItem = async () => {
-//   const itemDestroyed = await User.destroy({
-//     where: {
-//       username: 'oreo',
-//       movie_id: 3,
-//     }
-//   });
-//   console.log(itemDestroyed);
-//   return;
-// }
+const deleteMovie = async (id) => {
+  const itemDestroyed = await Movie.destroy({
+    where: {
+      id: id,
+    }
+  });
+  console.log(itemDestroyed);
+  return;
+}
 
-// deleteItem();
+// deleteMovie();
 
 module.exports = { getMovies, getMovie, getActorsFromMovieID };
 
