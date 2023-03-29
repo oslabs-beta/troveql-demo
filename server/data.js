@@ -258,7 +258,7 @@ const addMovie = async (title) => {
   return;
 }
 
-addMovie('test');
+// addMovie('test');
 
 
 
@@ -289,8 +289,8 @@ const deleteMovie = async (id) => {
   return;
 }
 
-// deleteMovie();
+// deleteMovie(11);
 
-module.exports = { getMovies, getMovie, getActorsFromMovieID };
+module.exports = { getMovies, getMovie, getActorsFromMovieID, addMovie, deleteMovie };
 
 

@@ -1,4 +1,4 @@
-const { getMovies, getMovie, getActorsFromMovieID } = require('./data');
+const { getMovies, getMovie, getActorsFromMovieID, addMovie, DeleteMovie } = require('./data');
 
 // Resolvers describe what the server returns to the client for a specific query
 const resolvers = {
@@ -9,7 +9,7 @@ const resolvers = {
     movie: async (obj, args, context, info) => {
       const result = await getMovie(args.id);
       return result;
-    }
+    },
     addmovie: async (args) => {
       const result = await addMovie(args.title);
       return;
