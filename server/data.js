@@ -18,7 +18,6 @@ const testMovies = [
   {title: 'Pulp Fiction', genre: 'Crime', year: 1994},
   {title: 'The Godfather', genre: 'Drama' , year: 1972},
   {title: 'The Dark Knight', genre: 'Action', year: 2008},
-  {title: 'Pulp Fiction', genre: 'Crime', year: 1994},
   {title: 'The Lord of the Rings', genre: 'Fantasy', year: 2003},
   {title: 'The Matrix', genre: 'Action', year: 1999},
   {title: 'Forrest Gump', genre: 'Drama', year: 1994},

@@ -34,12 +34,11 @@ body {
 .moviedisplay-container {
   display: flex;
   align-items: flex-start;
-  gap: 5em;
 }
 
 .movie-list {
-  padding: 2em;
   border-radius: 5%;
+  margin-left: 4em;
 }
 
 .movie-list li {
@@ -50,7 +49,7 @@ body {
 
 .movie-details {
   background-color:#1a1a1a;
-  margin-top: 4em;
+  margin: 2em 2em 0 4em;
   border-radius: 5%;
 }
 
