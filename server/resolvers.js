@@ -15,7 +15,6 @@ const resolvers = {
     actors: async (parent) => {
       // console.log('parent', parent);
       const result = await getActorsFromMovieID(parent.id);
-      console.log('result', result);
       return result;
     }
   }

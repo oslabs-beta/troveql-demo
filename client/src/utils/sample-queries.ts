@@ -6,10 +6,6 @@ const queries: Query = {
         movies {
             id
             title
-            actors 
-            {
-              name
-            }
         }
     }
     `,
