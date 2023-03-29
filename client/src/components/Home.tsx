@@ -30,7 +30,7 @@ function Home() {
 
 
   return (
-    <div className="movies-container">
+    <div className="home-container">
       <button id="getMovies" onClick={handleClicks}>GET ALL MOVIES</button>
     </div>
   )

@@ -60,14 +60,14 @@ function MovieDisplay() {
   allMovies.forEach((movie: Movie) => {
       movieList.push(
         <li key={movie.id}>
-          {movie.title}
+          <p>{movie.title}</p>
           <button id={movie.id} onClick={getDetails}>Get Details</button>
         </li>
       )
    })
 
   return (
-    <div className="main-wrapper">
+    <div className="moviedisplay-container">
       <ul className="movie-list">
         {movieList}
       </ul>
