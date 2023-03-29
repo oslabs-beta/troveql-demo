@@ -31,6 +31,34 @@ body {
   min-height: 100vh;
 }
 
+.moviedisplay-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.movie-list {
+  border-radius: 5%;
+  margin-left: 4em;
+}
+
+.movie-list li {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.movie-details {
+  background-color:#1a1a1a;
+  margin: 2em 2em 0 4em;
+  border-radius: 5%;
+}
+
+.movie-details p {
+  /* align-self: center; */
+  margin: 2em;
+}
+
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -72,3 +100,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
