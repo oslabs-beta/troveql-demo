@@ -262,6 +262,20 @@ const addMovie = async (title) => {
 
 
 
+// Deleting a movie from a user's movie list 
+const deleteMovie = async (id) => {
+  const itemDestroyed = await Movie.destroy({
+    where: {
+      id: id,
+    }
+  });
+  console.log(itemDestroyed);
+  return;
+}
+
+// deleteMovie(11);
+
+
 
 // Updating ratings of a movie from a user
 // const updateRating = async () => {
@@ -276,20 +290,6 @@ const addMovie = async (title) => {
 // }
 
 // updateRating();
-
-
-// Deleting a movie from a user's movie list 
-const deleteMovie = async (id) => {
-  const itemDestroyed = await Movie.destroy({
-    where: {
-      id: id,
-    }
-  });
-  console.log(itemDestroyed);
-  return;
-}
-
-// deleteMovie(11);
 
 module.exports = { getMovies, getMovie, getActorsFromMovieID, addMovie, deleteMovie };
 

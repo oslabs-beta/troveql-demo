@@ -6,6 +6,13 @@ import AddMovie from './components/AddMovie'
 import MovieDetails from './components/MovieDetails'
 
 function App() {
+
+  // window.addEventListener('scroll', function() {
+  //   let div = document.getElementsByClassName('movie-details');
+  //   let topOffset = window.innerHeight /2;
+  //   div.style.top(topOffset + this.window.pageYOffset + 'px');
+  // })
+
   return (
     <div className="movies-container">
         <h1>TROVEQL DEMO</h1>
