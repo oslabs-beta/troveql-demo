@@ -4,7 +4,7 @@ import queries from '../utils/sample-queries'
 import { Movie, GetMoviesData } from '../utils/types'
 
 function Home() {
-  // const [movies, changeMovies] = useState<Movie[]>([]);
+  const [movies, changeMovies] = useState<Movie[]>([]);
   const navigate = useNavigate();
 
   // get all movies on click
@@ -22,7 +22,7 @@ function Home() {
     })
     .then(response => response.json())
     .then((data: GetMoviesData) => {
-      // changeMovies(data.data.movies);
+      changeMovies(data.data.movies);
       navigate('/movies', {state:{movies: data.data.movies}});
       return;
     })

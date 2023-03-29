@@ -30,7 +30,7 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    createMovie(title: String!): Movie!
+    createMovie(title: String): Movie!
   }
 `;
 

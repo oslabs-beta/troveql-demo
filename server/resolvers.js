@@ -5,7 +5,7 @@ const resolvers = {
   Mutation: {
     createMovie: async (args) => {
       console.log('in mutation addmovie', args);
-      const result = await addMovie(args);
+      const result = await addMovie(args.title);
       return result;
     }
   },

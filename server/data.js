@@ -239,6 +239,7 @@ const getActorsFromMovieID = async (id) => {
       // push actor.dataValues object to allActors
       allActors.push(actor.dataValues);
     })
+    console.log(allActors);
     return allActors;
   } catch (error) {
     console.error(error);
@@ -254,8 +255,8 @@ const addMovie = async (title) => {
   const addMovie = await Movie.create({
     title: title,
   });
-  console.log('addMovie', addMovie);
-  return;
+  console.log('addMovie', addMovie.dataValues);
+  return addMovie.dataValues;
 }
 
 // addMovie('test');

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import queries from '../utils/sample-queries';
+import { Link } from "react-router-dom"
 // import { Movie, MovieDisplayProps} from '../utils/types';
 
 interface MovieForm {
   title: string,
 }
+
 
 
 function AddMovie() {
@@ -13,6 +15,7 @@ function AddMovie() {
     title: '',
   });
 
+  // const navigate = useNavigate();
 
   function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,9 +45,12 @@ function AddMovie() {
     .then(response => response.json())
     .then(data => {
       console.log('new movie added');
-      console.log('data', data)
+      console.log('data', data);
+      // navigate('/movies');
     })
     .catch(err => console.log(err));
+    navigate('/movies');
+    return;
 
   }
 
