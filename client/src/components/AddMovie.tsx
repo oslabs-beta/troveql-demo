@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import queries from '../utils/sample-queries';
+import queries from '../utils/sample-queries';
 // import { Movie, MovieDisplayProps} from '../utils/types';
 
 interface MovieForm {
@@ -13,8 +13,14 @@ function AddMovie() {
     title: '',
   });
 
+
   function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const form = e.currentTarget;
+    // const input = form.querySelector('input[name="title"]') as HTMLInputElement;
+    const query: string = queries.addMovie;
+    console.log('query', query, 'variables', movieData);
 
     // validate if input has value
     if (!movieData.title) {
@@ -28,26 +34,34 @@ function AddMovie() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(movieData)
+      body: JSON.stringify({
+        query,
+        variables: movieData
+      })
     })
     .then(response => response.json())
     .then(data => {
       console.log('new movie added');
-
+      console.log('data', data)
     })
     .catch(err => console.log(err));
 
   }
 
-  function handleInputChange (e) {
-    e.preventDefault();
+  function handleInputChange (e: React.ChangeEvent<HTMLInputElement>) {
+    // e.preventDefault();
+    const title = e.currentTarget.value;
+    setMovieData({title: title});
   }
+
+
+  console.log('moviedata', movieData);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Movie title:  </label>
-        <input type="text" id="title" name="title" onChange={handleInputChange}/>
+        <label htmlFor="title">Movie title </label>
+        <input type="text" id="title" name="title" value={movieData.title} onChange={handleInputChange}></input>
         <button type="submit">Submit</button>
       </form>
     </div>

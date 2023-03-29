@@ -30,27 +30,10 @@ function Home() {
   }
 
   // create a movie on click
-  function addMovie(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleAdd(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     navigate('/addmovie', {replace: true});
     return;
-    // const query: string = queries[e.currentTarget.id];
-    // fetch('/troveql', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     query
-    //   })
-    // })
-    // .then(response => response.json())
-    // .then((data: GetMoviesData) => {
-    //   // changeMovies(data.data.movies);
-    //   navigate('/movies', {state:{movies: data.data.movies}});
-    //   return;
-    // })
-    // .catch(err => console.log(err))
   }
 
 
@@ -58,7 +41,7 @@ function Home() {
   return (
     <div className="home-container">
       <button id="getMovies" onClick={handleClicks}>GET ALL MOVIES</button>
-      <button id="addMovie" onClick={addMovie}>ADD MOVIE</button>
+      <button id="addMovie" onClick={handleAdd}>ADD MOVIE</button>
     </div>
   )
 }

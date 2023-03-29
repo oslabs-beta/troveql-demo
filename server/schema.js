@@ -27,7 +27,10 @@ const typeDefs = `#graphql
     movies: [Movie!]!
     movie(id: ID): Movie!
     actors: [Actor!]!
-    actor(id: ID): Actor!
+  }
+
+  type Mutation {
+    createMovie(title: String!): Movie!
   }
 `;
 
@@ -39,6 +42,3 @@ module.exports = { schema };
 //   title: String!
 // }
 
-// type Mutation {
-//   createMovie(input: MovieInput): Movie
-// }
