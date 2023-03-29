@@ -258,7 +258,7 @@ const getActorsFromMovieID = async (id) => {
   }
 }
 
-getActorsFromMovieID(9);
+// getActorsFromMovieID(9);
 
 
 // Updating ratings of a movie from a user
