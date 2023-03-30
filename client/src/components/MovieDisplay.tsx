@@ -55,7 +55,7 @@ function MovieDisplay() {
       } else {
         delete detailObj.actors;
       }
-      // for every key that is not null or
+      // for every key that is not null
       for (const key in detailObj) {
         if (detailObj[key]) {
           detailArr.push(
