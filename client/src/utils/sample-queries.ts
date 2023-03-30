@@ -21,7 +21,14 @@ const queries: Query = {
               name
             }
       }
-    }`
+    }`,
+  addMovie: 
+    `mutation CreateMovie($title: String) {
+      createMovie(title: $title) {
+        id
+        title
+      }
+    }`,
 }
 
 export default queries

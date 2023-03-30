@@ -1,78 +1,95 @@
-import React from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import AddMovie from "./AddMovie";
+import { Movie, GetMoviesData } from '../utils/types';
 import queries from '../utils/sample-queries';
-// import MovieDetails from './MovieDetails';
-import { Movie, MovieDisplayProps} from '../utils/types';
 
 function MovieDisplay() {
-  const [movieDetails, setMovieDetails] = React.useState<JSX.Element[]>([]);
-  const location = useLocation();
-  const allMovies: MovieDisplayProps = location.state.movies;
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movieDetails, setMovieDetails] = useState<JSX.Element[]>([]);
 
-    // Get movie details
-    function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
-      const query: string = queries.getMovieDetails;
-      const variables = { id: Number(event.currentTarget.id) };
-      fetch('/troveql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          query,
-          variables
-        })
+  useEffect(() => {
+    const query: string = queries.getMovies;
+    fetch('/troveql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query
       })
-      .then(response => response.json())
-      .then(data => {
-        const detailObj = data.data.movie;
-        const detailArr: JSX.Element[] = [];
-        // if actor list doesn't exist, remove key from movie details
-        // if actor list exists, create JSX element for each actor, push it to actorList arr and reassign movie actors key with actorList arr
-        if (!detailObj.actors.length) {
-          delete detailObj.actors;
-          for (const key in detailObj) {
-            detailArr.push(
-              <p key={key}>{key}: {detailObj[key]}</p>
-            )
-          }
-        } else {
-          let actorList: string[] = [];
-          for (let i = 0; i < detailObj.actors.length - 1; i++) {
-            actorList.push(<span>{detailObj.actors[i].name} | </span>);
-          };
-          actorList.push(<span>{detailObj.actors[detailObj.actors.length - 1].name}</span>);
-          detailObj.actors = actorList;
-          for (const key in detailObj) {
-            detailArr.push(
-              <p key={key}>{key}: {detailObj[key]}</p>
-            )
-          }
+    })
+    .then(response => response.json())
+    .then((data: GetMoviesData) => {
+      setMovies(data.data.movies);
+      return;
+    })
+    .catch(err => console.log(err))
+  }, [])
+  
+  // Get movie details
+  function getDetails (event: React.MouseEvent<HTMLButtonElement>) {
+    const query: string = queries.getMovieDetails;
+    const variables = { id: Number(event.currentTarget.id) };
+    fetch('/troveql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query,
+        variables
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const detailObj = data.data.movie;
+      const detailArr: JSX.Element[] = [];
+      // if actor list exists, create JSX element for each actor, push it to actorList arr and reassign movie actors key with actorList arr
+      if (detailObj.actors.length) {
+        let actorList: JSX.Element[] = [];
+        for (let i = 0; i < detailObj.actors.length - 1; i++) {
+          actorList.push(<span>{detailObj.actors[i].name} | </span>);
+        };
+        actorList.push(<span>{detailObj.actors[detailObj.actors.length - 1].name}</span>);
+        detailObj.actors = actorList;
+      } else {
+        delete detailObj.actors;
+      }
+      // for every key that is not null
+      for (const key in detailObj) {
+        if (detailObj[key]) {
+          detailArr.push(
+            <p key={key}>{key}: {detailObj[key]}</p>
+          )
         }
-        setMovieDetails(detailArr);
-        return;
-      })
-      .catch(err => console.log(err));
-    }
+      }
+      setMovieDetails(detailArr);
+      return;
+    })
+    .catch(err => console.log(err));
+  }
 
-  let movieList: [] = [];
+  let movieList: any[] = [];
   // Display all movies
-  allMovies.forEach((movie: Movie) => {
+  movies.forEach((movie: Movie) => {
       movieList.push(
         <li key={movie.id}>
-          <p>{movie.title}</p>
-          <button id={movie.id} onClick={getDetails}>Get Details</button>
+          <p key={movie.id}>{movie.title}</p>
+          <button id={String(movie.id)} onClick={getDetails}>Get Details</button>
         </li>
       )
    })
 
   return (
-    <div className="moviedisplay-container">
-      <ul className="movie-list">
-        {movieList}
-      </ul>
-      <div className="movie-details">
-        {movieDetails}
+    <div>
+      <AddMovie movies={movies} setMovies={setMovies}/>
+      <div className="moviedisplay-container">
+        <ul className="movie-list">
+          {movieList}
+        </ul>
+        <div className="movie-details">
+          {movieDetails}
+        </div>
       </div>
     </div>
   )

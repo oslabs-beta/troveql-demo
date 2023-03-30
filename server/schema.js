@@ -27,10 +27,18 @@ const typeDefs = `#graphql
     movies: [Movie!]!
     movie(id: ID): Movie!
     actors: [Actor!]!
-    actor(id: ID): Actor!
+  }
+
+  type Mutation {
+    createMovie(title: String): Movie!
   }
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 module.exports = { schema };
+
+// type MovieInput {
+//   title: String!
+// }
+

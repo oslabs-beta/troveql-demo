@@ -49,8 +49,7 @@ body {
 
 .movie-details {
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 25%;
   background-color:#1a1a1a;
   margin: 2em 2em 0 4em;
   border-radius: 5%;
