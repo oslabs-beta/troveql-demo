@@ -3,8 +3,7 @@ const { getMovies, getMovie, getActorsFromMovieID, addMovie, DeleteMovie } = req
 // Resolvers describe what the server returns to the client for a specific query
 const resolvers = {
   Mutation: {
-    createMovie: async (args) => {
-      console.log('in mutation addmovie', args);
+    createMovie: async (obj, args, context, info) => {
       const result = await addMovie(args.title);
       return result;
     }
@@ -20,7 +19,6 @@ const resolvers = {
   },
   Movie: {
     actors: async (parent) => {
-      // console.log('parent', parent);
       const result = await getActorsFromMovieID(parent.id);
       return result;
     }

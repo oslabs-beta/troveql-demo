@@ -23,8 +23,9 @@ const queries: Query = {
       }
     }`,
   addMovie: 
-    `mutation CreateMovie($title: String!) {
+    `mutation CreateMovie($title: String) {
       createMovie(title: $title) {
+        id
         title
       }
     }`,

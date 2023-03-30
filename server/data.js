@@ -274,7 +274,7 @@ const deleteMovie = async (id) => {
   return;
 }
 
-// deleteMovie(11);
+// deleteMovie(14);
 
 
 
