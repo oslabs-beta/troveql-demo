@@ -23,11 +23,16 @@ type ServerError = {
 // The TroveQLCache middleware function requires 2 arguments:
 // (1) size for the cache
 // (2) your server's graphQL URL endpoint
+// (3) boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
 const { TroveQLCache } = require('troveql');
-const cache = new TroveQLCache(5, 'http://localhost:4000/graphql');
+const cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true);
 app.use('/troveql', 
   cache.queryCache,
   (req: Request, res: Response) => res.status(200).json(res.locals.value)
+);
+app.use('/trovemetrics', 
+  cache.troveMetrics,
+  (req: Request, res: Response) => res.status(200).json(res.locals.message)
 );
 
 const { schema } = require('./schema');

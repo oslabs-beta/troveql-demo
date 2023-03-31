@@ -10,11 +10,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // The TroveQLCache middleware function requires 2 arguments:
-// (1) persistence value for the cache
+// (1) size for the cache
 // (2) your server's graphQL URL endpoint
+// (3) boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
 var TroveQLCache = require('troveql').TroveQLCache;
-var cache = new TroveQLCache(5, 'http://localhost:4000/graphql');
+var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true);
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });
+app.use('/trovemetrics', cache.troveMetrics, function (req, res) { return res.status(200).json(res.locals.message); });
 var schema = require('./schema').schema;
 var resolvers = require('./resolvers').resolvers;
 app.use('/graphql', graphqlHTTP({
