@@ -30,6 +30,7 @@ app.use('/troveql',
   cache.queryCache,
   (req: Request, res: Response) => res.status(200).json(res.locals.value)
 );
+//do we want to just add the troveMetrics middleware to the /troveql endpoint?
 app.use('/trovemetrics', 
   cache.troveMetrics,
   (req: Request, res: Response) => res.status(200).json(res.locals.message)
