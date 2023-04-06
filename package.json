@@ -9,7 +9,8 @@
     "sequelize-cli": "^6.6.0"
   },
   "scripts": {
-    "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\""
+    "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\"",
+    "test": "cd ./server && npm link troveql && cd .. &&  npm start"
   },
   "devDependencies": {
     "eslint": "^8.35.0",
