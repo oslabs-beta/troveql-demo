@@ -9,13 +9,16 @@ var PORT = 4000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// The TroveQLCache middleware function requires 2 arguments:
+// The TroveQLCache middleware function requires 2 arguments with an addition 2 optional arguments:
 // (1) size for the cache
 // (2) your server's graphQL URL endpoint
-// (3) boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
+// (3) optional - boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
+// (4) optional - object where the key is the name of your graphQL mutation query and the value is a string of the object Type it mutates
 var TroveQLCache = require('troveql').TroveQLCache;
-var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true);
+var mutations = { createMovie: 'movie' };
+var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true, mutations);
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });
+//do we want to just add the troveMetrics middleware to the /troveql endpoint?
 app.use('/trovemetrics', cache.troveMetrics, function (req, res) { return res.status(200).json(res.locals.message); });
 var schema = require('./schema').schema;
 var resolvers = require('./resolvers').resolvers;
