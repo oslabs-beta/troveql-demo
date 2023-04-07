@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 // (3) optional - boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
 // (4) optional - object where the key is the name of your graphQL mutation query and the value is a string of the object Type it mutates
 var TroveQLCache = require('troveql').TroveQLCache;
-var mutations = { createMovie: 'movie' };
+var mutations = {
+    createMovie: 'movie',
+    deleteMovie: 'movie'
+};
 var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true, mutations);
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });
 //do we want to just add the troveMetrics middleware to the /troveql endpoint?

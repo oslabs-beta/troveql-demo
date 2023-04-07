@@ -31,7 +31,10 @@ const typeDefs = `#graphql
 
   type Mutation {
     createMovie(title: String): Movie!
+    deleteMovie(id: ID): Movie!
   }
+
+ 
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
@@ -41,4 +44,3 @@ module.exports = { schema };
 // type MovieInput {
 //   title: String!
 // }
-
