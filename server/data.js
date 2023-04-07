@@ -288,7 +288,6 @@ const deleteMovie = async (id) => {
       console.log(`Movie with id ${id} not found`);
       return;
     }
-
     // Delete the movie from the database
     await Movie.destroy({
       where: {
