@@ -93,6 +93,7 @@ function MovieDisplay() {
           console.log(`Movie with ID ${movieId} has been deleted.`);
           const updatedMovies = movies.filter((movie) => movie.id !== movieId); // this is fine
           setMovies(updatedMovies);
+          setMovieDetails([]);
         } else {
           console.log(`Failed to delete movie with ID ${movieId}.`);
         }
