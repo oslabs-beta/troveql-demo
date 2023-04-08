@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import AddMovie from './AddMovie';
+import EditModal from './EditModal';
 import { Movie, GetMoviesData } from '../utils/types';
 import queries from '../utils/sample-queries';
 
 function MovieDisplay() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [movieDetails, setMovieDetails] = useState<JSX.Element[]>([]);
+  const [modal, setModal] = useState<any>({display: false, movieId: null});
 
   useEffect(() => {
     const query: string = queries.getMovies;
@@ -101,6 +103,10 @@ function MovieDisplay() {
       .catch((err) => console.log(err));
   }
 
+  function onEdit(event: React.MouseEvent<HTMLButtonElement>) {
+    setModal({display: true, movieId: event.currentTarget.id})
+  }
+
   let movieList: any[] = [];
   // Display all movies
   movies.forEach((movie: Movie) => {
@@ -112,7 +118,10 @@ function MovieDisplay() {
             Get Details
           </button>
           <button id={String(movie.id)} onClick={deleteMovie}>
-            X
+            DEL
+          </button>
+          <button id={String(movie.id)} onClick={onEdit}>
+            EDIT
           </button>
         </div>
       </li>
@@ -122,6 +131,17 @@ function MovieDisplay() {
   return (
     <div>
       <AddMovie movies={movies} setMovies={setMovies} />
+      {modal.display && (
+        <div>
+          <div id="overlay"></div>
+          <EditModal 
+            modal={modal} 
+            setModal={setModal} 
+            movies={movies} 
+            setMovies={setMovies}
+          />
+        </div>
+      )}
       <div className="moviedisplay-container">
         <ul className="movie-list">{movieList}</ul>
         <div className="movie-details">{movieDetails}</div>

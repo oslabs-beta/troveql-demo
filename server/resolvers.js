@@ -4,6 +4,7 @@ const {
   getActorsFromMovieID,
   addMovie,
   deleteMovie,
+  editMovie,
 } = require('./data');
 
 // Resolvers describe what the server returns to the client for a specific query
@@ -17,6 +18,12 @@ const resolvers = {
     deleteMovie: async (obj, args, context, info) => {
       console.log('in delete movie resolver');
       const result = await deleteMovie(args.id);
+      return result;
+    },
+
+    editMovie: async (obj, args, context, info) => {
+      console.log('in edit movie resolver');
+      const result = await editMovie(args.id, args.title);
       return result;
     },
   },

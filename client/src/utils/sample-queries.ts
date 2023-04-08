@@ -33,6 +33,13 @@ const queries: Query = {
         title
       }
     }`,
+
+  editMovie: `mutation EditMovie($id: ID, $title: String) {
+    editMovie(id: $id, title: $title) {
+      id
+      title
+    }
+  }`,
 };
 
 export default queries;

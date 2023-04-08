@@ -23,6 +23,10 @@ a:hover {
   color: #535bf2;
 }
 
+h3 {
+  margin: .2rem;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -81,7 +85,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin: 1em;
+  margin: .2rem;
 }
 button:hover {
   border-color: #646cff;
@@ -104,4 +108,42 @@ button:focus-visible {
   }
 }
 
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15rem;
+  border: 1px solid white;
+  border-radius: 8px;
+  z-index: 999;
+  background-color: #242424;
+  display: flex;
+  flex-direction:column;
+  gap: .5rem;
+  justify-content: center;
+  padding: 2rem;
+}
 
+#overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.small-input {
+  height: 1.5rem;
+  width: 10rem;
+}
+
+label {
+  gap: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: .2rem;
+}
