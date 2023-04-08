@@ -319,10 +319,37 @@ const deleteMovie = async (id) => {
 
 // updateRating();
 
+// Editing a movie 
+const editMovie = async (id, title) => {
+  try {
+    // Find the movie to edit
+    const movieToEdit = await Movie.findOne({
+      where: {
+        id: id,
+      },
+    });
+    console.log('MOVIE TO EDIT IN DATA.JS', movieToEdit);
+    if (!movieToEdit) {
+      console.log(`Movie with id ${id} not found`);
+      return;
+    }
+    // Delete the movie from the database
+    const updatedMovie = await Movie.update(
+      {title: title },
+      {returning: true, where: {id: id}}
+    );
+    console.log('UPDATED MOVIE', updatedMovie)
+    return updatedMovie;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getMovies,
   getMovie,
   getActorsFromMovieID,
   addMovie,
   deleteMovie,
+  editMovie,
 };
