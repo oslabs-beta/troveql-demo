@@ -34,7 +34,7 @@ const queries: Query = {
       }
     }`,
 
-  editMovie: `mutation EditMovie($id: ID, title: string) {
+  editMovie: `mutation EditMovie($id: ID, $title: String) {
     editMovie(id: $id, title: $title) {
       id
       title

@@ -333,13 +333,14 @@ const editMovie = async (id, title) => {
       console.log(`Movie with id ${id} not found`);
       return;
     }
-    // Delete the movie from the database
+    // Edit the movie in the database
+    console.log('THIS IS THE NEW TITLE', title)
     const updatedMovie = await Movie.update(
       {title: title },
       {returning: true, where: {id: id}}
     );
     console.log('UPDATED MOVIE', updatedMovie)
-    return updatedMovie;
+    return updatedMovie[1][0];
   } catch (error) {
     console.error(error);
   }

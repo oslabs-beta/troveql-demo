@@ -133,7 +133,12 @@ function MovieDisplay() {
       {modal.display && (
         <div>
           <div id="overlay"></div>
-          <EditModal modal={modal} setModal={setModal} movies={movies} />
+          <EditModal 
+            modal={modal} 
+            setModal={setModal} 
+            movies={movies} 
+            setMovies={setMovies}
+          />
         </div>
       )}
       <div className="moviedisplay-container">

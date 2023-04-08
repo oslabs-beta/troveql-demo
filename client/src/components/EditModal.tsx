@@ -21,7 +21,7 @@ function EditModal(props:any): JSX.Element {
     props.setModal({display: false, movieId: null})
     const movieId = props.modal.movieId;
     const query: string = queries.editMovie;
-    const variables = { id: Number(e.currentTarget.id), title: newTitle.current };
+    const variables = { id: Number(movieId), title: newTitle.current };
 
     fetch(`/troveql`, {
       method: 'POST',
@@ -34,13 +34,19 @@ function EditModal(props:any): JSX.Element {
       }),
     })
       .then((response) => {
-        if (response.ok) {
-          console.log(`Movie with ID ${movieId} has been edited.`);
-          const updatedMovies = props.movies.filter((movie: Movie) => movie.id !== movieId); 
-          props.setMovies(updatedMovies);
-        } else {
-          console.log(`Failed to edit movie with ID ${movieId}.`);
-        }
+        if (response.ok) return response.json();
+        else console.log(`Failed to edit movie with ID ${movieId}.`)
+      })
+      .then((data) => {
+        console.log(`Movie with ID ${movieId} has been edited.`);
+        props.setMovies((prevMovies: Movie[]) => {
+          const updatedMovies: Movie[] = [];
+          prevMovies.forEach((movie: Movie)=>{
+            if (movie.id === movieId) updatedMovies.push(data.data.editMovie)
+            else updatedMovies.push(movie)
+          })
+          return updatedMovies;
+        });
       })
       .catch((err) => console.log(err));
     }
