@@ -45,9 +45,11 @@ const testActors = [
 //   })
 
 const testMA = [
-  { movie_id: 113, actor_id: 1 },
-  { movie_id: 115, actor_id: 2 },
-  { movie_id: 115, actor_id: 3 },
+  { movie_id: 129, actor_id: 2 },
+  { movie_id: 130, actor_id: 3 },
+  { movie_id: 128, actor_id: 5 },
+  { movie_id: 128, actor_id: 6 },
+  { movie_id: 130, actor_id: 7 },
 ];
 
 // UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS IN JOIN TABLE
