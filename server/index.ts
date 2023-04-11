@@ -1,7 +1,8 @@
 // const express = require('express');
 const express = require('express');
-const { graphqlHTTP } = require("express-graphql");
+const { graphqlHTTP } = require('express-graphql');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = 4000;

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import AddMovie from './AddMovie';
-import { Movie, GetMoviesData } from '../utils/types';
+import React from 'react';
+import { Movie } from '../utils/types';
 import queries from '../utils/sample-queries';
 
 function EditModal(props:any): JSX.Element {
 
-  let newTitle = React.useRef<string>('')
+  const newTitle = React.useRef<string>('')
 
   function updateNewTitle(e: React.ChangeEvent<HTMLInputElement>){
     newTitle.current = e.target.value;

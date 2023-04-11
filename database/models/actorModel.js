@@ -1,9 +1,10 @@
 // import sequelize instance
-const sequelize  = require('../db_connect');
+const sequelize = require('./index');
+// const sequelize = db.sequelize;
 // import Constructors for model creation
 const { DataTypes } = require('sequelize');
-// import movieModel to associate foreign key
-const Movie = require('./movieModel');
+
+// console.log('actorModel', db, 'sequelize', sequelize);
 
 // create Actor model
 const Actor = sequelize.define("actor", {

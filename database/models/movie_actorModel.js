@@ -1,5 +1,5 @@
 // import sequelize instance
-const sequelize  = require('../db_connect');
+const sequelize = require('./index');
 // import Constructors for model creation
 const { DataTypes } = require('sequelize');
 // import movieModel to associate foreign key

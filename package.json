@@ -10,13 +10,21 @@
   },
   "scripts": {
     "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\"",
-    "test": "cd ./server && npm link troveql && cd .. &&  npm start"
+    "test": "cd ./server && npm link troveql && cd .. &&  npm start",
+    "lint": "eslint ."
   },
   "devDependencies": {
-    "eslint": "^8.35.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "dotenv-cli": "^7.2.1",
+    "eslint": "^8.38.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "typescript": "^5.0.4"
   }
 }
