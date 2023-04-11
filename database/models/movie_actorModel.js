@@ -17,12 +17,12 @@ const ActorinMovies = sequelize.define("movie_actor", {
 
   movie_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true,
   },
 
   actor_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 });
 

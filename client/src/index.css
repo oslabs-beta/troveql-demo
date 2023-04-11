@@ -140,7 +140,7 @@ button:focus-visible {
   width: 10rem;
 }
 
-label {
+.edit-title-label {
   gap: .5rem;
   display: flex;
   align-items: center;
