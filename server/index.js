@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var graphqlHTTP = require('express-graphql').graphqlHTTP;
 var cors = require('cors');
+require('dotenv').config();
 var app = express();
 var PORT = 4000;
 app.use(cors());
