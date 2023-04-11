@@ -45,13 +45,15 @@ const testActors = [
 //   })
 
 const testMA = [
-  { movie_id: 7, actor_id: 1 },
-  { movie_id: 9, actor_id: 2 },
-  { movie_id: 9, actor_id: 3 },
+  { movie_id: 129, actor_id: 2 },
+  { movie_id: 130, actor_id: 3 },
+  { movie_id: 128, actor_id: 5 },
+  { movie_id: 128, actor_id: 6 },
+  { movie_id: 130, actor_id: 7 },
 ];
 
-// UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS
-// movieActors.bulkCreate(testMA)
+// UNCOMMENT THE FOLLOWING CODES TO CREATE ACTORS IN JOIN TABLE
+// ActorinMovies.bulkCreate(testMA)
 //   .then(() => {
 //     console.log('join table data created successfully');
 //   })
@@ -262,6 +264,7 @@ const addMovie = async (title) => {
 // addMovie('test');
 
 // Deleting a movie from a user's movie list
+// Deleting movie_id row also from join table
 const deleteMovie = async (id) => {
   try {
     //first find the movie and await the result, then destroy
@@ -288,6 +291,19 @@ const deleteMovie = async (id) => {
       console.log(`Movie with id ${id} not found`);
       return;
     }
+
+    // Delete the movie from join table first
+    const movieInJoinTable = await ActorinMovies.destroy(
+      { 
+        where: { 
+          movie_id: id,
+        } 
+    });
+    
+    if (movieInJoinTable === 0) {
+      console.log(`Movie with id ${id} is not found in movie_actor join table`);
+    }
+    
     // Delete the movie from the database
     await Movie.destroy({
       where: {
@@ -305,19 +321,6 @@ const deleteMovie = async (id) => {
 
 // deleteMovie(14);
 
-// Updating ratings of a movie from a user
-// const updateRating = async () => {
-//   const rate = await User.update({rating: 95}, {
-//     where: {
-//       username: 'oreo',
-//       movie_id: 2,
-//     }
-//   });
-//   console.log(rate);
-//   return;
-// }
-
-// updateRating();
 
 // Editing a movie 
 const editMovie = async (id, title) => {
@@ -345,6 +348,7 @@ const editMovie = async (id, title) => {
     console.error(error);
   }
 };
+
 
 module.exports = {
   getMovies,

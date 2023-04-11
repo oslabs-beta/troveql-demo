@@ -58,7 +58,7 @@ function EditModal(props:any): JSX.Element {
   return (
     <div className='modal'>
       <h3>EDIT MOVIE</h3>
-      <label htmlFor="moveName">
+      <label htmlFor="moveName" className="edit-title-label">
         TITLE
         <input 
           className="small-input" 
