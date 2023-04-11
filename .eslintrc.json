@@ -6,7 +6,6 @@
     },
     "extends": [
         "eslint:recommended", 
-        // "airbnb-base",
         "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [
@@ -21,11 +20,11 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
         "no-console": "warn",
         "quotes": [
-            "off",
-            "double"
+            "warn",
+            "single"
         ]
     }
 }

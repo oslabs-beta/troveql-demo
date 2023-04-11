@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\"",
-    "test": "cd ./server && npm link troveql && cd .. &&  npm start"
+    "test": "cd ./server && npm link troveql && cd .. &&  npm start",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.58.0",

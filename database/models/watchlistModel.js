@@ -6,7 +6,7 @@ const { DataTypes } = require('sequelize');
 const Movie = require('./movieModel');
 
 // create Watchlist model
-const Watchlist = sequelize.define("watchlist", {
+const Watchlist = sequelize.define('watchlist', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

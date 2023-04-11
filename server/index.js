@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // const express = require('express');
 var express = require('express');
-var graphqlHTTP = require("express-graphql").graphqlHTTP;
+var graphqlHTTP = require('express-graphql').graphqlHTTP;
 var cors = require('cors');
 var app = express();
 var PORT = 4000;
