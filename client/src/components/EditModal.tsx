@@ -4,7 +4,7 @@ import queries from '../utils/sample-queries';
 
 function EditModal(props:any): JSX.Element {
 
-  let newTitle = React.useRef<string>('')
+  const newTitle = React.useRef<string>('')
 
   function updateNewTitle(e: React.ChangeEvent<HTMLInputElement>){
     newTitle.current = e.target.value;

@@ -1,7 +1,6 @@
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
 const ActorinMovies = require('../database/models/movie_actorModel');
-require('dotenv').config();
 
 // Creating new instances of movies to PostgreSQL
 const testMovies = [
