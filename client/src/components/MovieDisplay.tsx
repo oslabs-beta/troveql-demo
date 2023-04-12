@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddMovie from './AddMovie';
 import EditModal from './EditModal';
+import ResetMovie from './ResetMovie';
 import { Movie, GetMoviesData } from '../utils/types';
 import queries from '../utils/sample-queries';
 
@@ -48,7 +49,7 @@ function MovieDisplay() {
         const detailArr: JSX.Element[] = [];
         // if actor list exists, create JSX element for each actor, push it to actorList arr and reassign movie actors key with actorList arr
         if (detailObj.actors.length) {
-          let actorList: JSX.Element[] = [];
+          const actorList: JSX.Element[] = [];
           for (let i = 0; i < detailObj.actors.length - 1; i++) {
             actorList.push(<span>{detailObj.actors[i].name} | </span>);
           }
@@ -130,6 +131,7 @@ function MovieDisplay() {
 
   return (
     <div>
+      <ResetMovie movies={movies} setMovies={setMovies} /><br />
       <AddMovie movies={movies} setMovies={setMovies} />
       {modal.display && (
         <div>
