@@ -37,7 +37,7 @@ function ResetMovie (props: any) {
 
   return (
     <div>
-      <button onClick={handleReset}>Reset Movie to Default</button>
+      
     </div>
   );
 }

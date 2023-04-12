@@ -16,6 +16,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/troveql': 'http://localhost:4000/troveql',
+      '/reset': 'http://localhost:4000/reset',
     }
   }
 })
