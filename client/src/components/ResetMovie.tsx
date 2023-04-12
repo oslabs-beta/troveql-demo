@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetMoviesData } from '../utils/types';
+import { GetMoviesData, Movie } from '../utils/types';
 import queries from '../utils/sample-queries';
 
 function ResetMovie (props: any) {
@@ -7,7 +7,7 @@ function ResetMovie (props: any) {
 
   function handleReset(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const query: string = queries.resetMovie;
+    const query: string = queries.getMovies;
     // reset movies
     fetch('/troveql', {
       method: 'POST',
@@ -19,9 +19,18 @@ function ResetMovie (props: any) {
       }),
     })
       .then((response) => response.json())
-      .then((data: GetMoviesData) => {
-        props.setMovies(data.data.movies);
-        return;
+      .then((data) => {
+        // console.log('dataresetMovie', data);
+        // props.setMovies(data.data.movie);
+        props.setMovies((prevMovies: Movie[]) => {
+          for (let i = 0; i < prevMovies.length; i++) {
+            if (prevMovies[i].title !== data.data.movies[i].title) {
+              return data.data.movie;
+            } 
+          }
+          return [...prevMovies];
+        })
+        return location.reload();
       })
       .catch((err) => console.log(err));
   }

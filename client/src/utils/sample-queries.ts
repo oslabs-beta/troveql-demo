@@ -38,13 +38,14 @@ const queries: Query = {
       id
       title
     }
-  }`,
-  resetMovie: `query {
-    resetMovie {
-      id
-      title
-    }
   }`
 };
 
 export default queries;
+
+// resetMovie: `query {
+//   resetMovie {
+//     id
+//     title
+//   }
+// }`

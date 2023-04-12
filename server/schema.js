@@ -27,7 +27,6 @@ const typeDefs = `#graphql
     movies: [Movie!]!
     movie(id: ID): Movie!
     actors: [Actor!]!
-    resetMovie: [Movie!]!
   }
 
   type Mutation {

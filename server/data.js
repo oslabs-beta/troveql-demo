@@ -1,6 +1,7 @@
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
 const ActorinMovies = require('../database/models/movie_actorModel');
+const sequelize = require('sequelize');
 
 // Creating new instances of movies to PostgreSQL
 // const testMovies = [
@@ -98,31 +99,29 @@ const getMovies = async () => {
       // add movies to movies table, if not, do nothing
       // add movie and actor to join table
     const actorCount = await Actor.count();
+    const testActors = [
+      { name: 'Tom Hanks', gender: 'Male', place_of_birth: 'USA' },
+      { name: 'Leonardo DiCaprio', gender: 'Male', place_of_birth: 'USA' },
+      { name: 'Kate Winslet', gender: 'Female', place_of_birth: 'USA' },
+      { name: 'Morgan Freeman', gender: 'Male', place_of_birth: 'USA' },
+      { name: 'Cate Blanchett', gender: 'Male', place_of_birth: 'USA' },
+      { name: 'Uma Thurman', gender: 'Female', place_of_birth: 'USA' },
+      { name: 'Carrie-Anne Moss', gender: 'Female', place_of_birth: 'Canada' },
+    ];
+    const testMovies = [
+      { title: 'Pulp Fiction', genre: 'Crime', year: 1994 },
+      { title: 'The Godfather', genre: 'Drama', year: 1972 },
+      { title: 'The Dark Knight', genre: 'Action', year: 2008 },
+      { title: 'The Lord of the Rings', genre: 'Fantasy', year: 2003 },
+      { title: 'The Matrix', genre: 'Action', year: 1999 },
+      { title: 'Forrest Gump', genre: 'Drama', year: 1994 },
+      { title: 'Star Wars', genre: 'Fiction', year: 1977 },
+      { title: 'Titanic', genre: 'Romance', year: 1997 },
+      { title: 'Jurassic Park', genre: 'Adventure', year: 1993 },
+    ];
+
     if (actorCount === 0) {
-      const testActors = [
-        { name: 'Tom Hanks', gender: 'Male', place_of_birth: 'USA' },
-        { name: 'Leonardo DiCaprio', gender: 'Male', place_of_birth: 'USA' },
-        { name: 'Kate Winslet', gender: 'Female', place_of_birth: 'USA' },
-        { name: 'Morgan Freeman', gender: 'Male', place_of_birth: 'USA' },
-        { name: 'Cate Blanchett', gender: 'Male', place_of_birth: 'USA' },
-        { name: 'Uma Thurman', gender: 'Female', place_of_birth: 'USA' },
-        { name: 'Carrie-Anne Moss', gender: 'Female', place_of_birth: 'Canada' },
-      ];
       await Actor.bulkCreate(testActors);
-
-      // add default movies
-      const testMovies = [
-        { title: 'Pulp Fiction', genre: 'Crime', year: 1994 },
-        { title: 'The Godfather', genre: 'Drama', year: 1972 },
-        { title: 'The Dark Knight', genre: 'Action', year: 2008 },
-        { title: 'The Lord of the Rings', genre: 'Fantasy', year: 2003 },
-        { title: 'The Matrix', genre: 'Action', year: 1999 },
-        { title: 'Forrest Gump', genre: 'Drama', year: 1994 },
-        { title: 'Star Wars', genre: 'Fiction', year: 1977 },
-        { title: 'Titanic', genre: 'Romance', year: 1997 },
-        { title: 'Jurassic Park', genre: 'Adventure', year: 1993 },
-      ];
-
       await Movie.bulkCreate(testMovies);
 
       // add join table back in via movie title
@@ -132,7 +131,7 @@ const getMovies = async () => {
       const movie4 = await Movie.findOne({ where: { title: 'Titanic' } });
       const movieArr = [movie1, movie2, movie3, movie4];
 
-      const actor1 = await Actor.findOne({ where: {name: 'Tome Hanks'} });
+      const actor1 = await Actor.findOne({ where: {name: 'Morgan Freeman'} });
       const actor2 = await Actor.findOne({ where: {name: 'Uma Thurman'} });
       const actor3 = await Actor.findOne({ where: {name: 'Leonardo DiCaprio'} });
       const actor4 = await Actor.findOne({ where: {name: 'Kate Winslet'} });
@@ -142,11 +141,39 @@ const getMovies = async () => {
 
       for (let i = 0; i < 4; i++) {
         testMA.push({
-          movie_id: movieArr[i].id,
-          actor_id: actorArr[i].id
+          movie_id: movieArr[i].dataValues.id,
+          actor_id: actorArr[i].dataValues.id
         })
       }
-    
+
+      await ActorinMovies.bulkCreate(testMA);
+
+    } else if (actorCount !== 0) {
+      await ActorinMovies.destroy({ where: {} });
+      await Movie.destroy({ where: {} });
+      await Movie.bulkCreate(testMovies);
+      // add join table back in via movie title
+      const movie1 = await Movie.findOne({ where: { title: 'Forrest Gump' } });
+      const movie2 = await Movie.findOne({ where: { title: 'Pulp Fiction' } });
+      const movie3 = await Movie.findOne({ where: { title: 'Titanic' } });
+      const movie4 = await Movie.findOne({ where: { title: 'Titanic' } });
+      const movieArr = [movie1, movie2, movie3, movie4];
+
+      const actor1 = await Actor.findOne({ where: {name: 'Morgan Freeman'} });
+      const actor2 = await Actor.findOne({ where: {name: 'Uma Thurman'} });
+      const actor3 = await Actor.findOne({ where: {name: 'Leonardo DiCaprio'} });
+      const actor4 = await Actor.findOne({ where: {name: 'Kate Winslet'} });
+      const actorArr = [actor1, actor2, actor3, actor4]
+
+      const testMA = [];
+
+      for (let i = 0; i < 4; i++) {
+        testMA.push({
+          movie_id: movieArr[i].dataValues.id,
+          actor_id: actorArr[i].dataValues.id
+        })
+      }
+
       await ActorinMovies.bulkCreate(testMA);
     }
 
@@ -415,11 +442,6 @@ const editMovie = async (id, title) => {
 const resetMovie = async () => {
   try {
     // delete all join table rows
-    // await ActorinMovies.destroy({ 
-    //   where: {},
-    //   truncate: true
-    // });
-
     // delete all movies
     await Movie.destroy({ 
       where: {},
@@ -450,18 +472,18 @@ const resetMovie = async () => {
     const movie4 = await Movie.findOne({ where: { title: 'Titanic' } });
     const movieArr = [movie1, movie2, movie3, movie4];
 
-    const actor1 = await Actor.findOne({ where: {name: 'Tome Hanks'} });
+    const actor1 = await Actor.findOne({ where: {name: 'Morgan Freeman'} });
     const actor2 = await Actor.findOne({ where: {name: 'Uma Thurman'} });
     const actor3 = await Actor.findOne({ where: {name: 'Leonardo DiCaprio'} });
     const actor4 = await Actor.findOne({ where: {name: 'Kate Winslet'} });
-    const actorArr = [actor1, actor2, actor3, actor4]
+    const actorArr = [actor1, actor2, actor3, actor4];
 
     const testMA = [];
 
     for (let i = 0; i < 4; i++) {
       testMA.push({
-        movie_id: movieArr[i].id,
-        actor_id: actorArr[i].id
+        movie_id: movieArr[i].dataValues.id,
+        actor_id: actorArr[i].dataValues.id
       })
     }
     
@@ -469,7 +491,7 @@ const resetMovie = async () => {
     
     // return movie list
     const movies = await Movie.findAll({
-      attributes: ['id', 'title', 'genre', 'year'],
+      attributes: ['id', 'title'],
       include: [
         {
           model: Actor,
@@ -491,13 +513,14 @@ const resetMovie = async () => {
       // push movie.dataValues object to allMovies
       allMovies.push(movie.dataValues);
     });
-    // console.log(allMovies);
+
+    console.log('allMovies', movies);
     console.log('Reset all movies from db');
     return allMovies;
-
   } catch (error) {
     console.error(error);
   }
+
 };
 
 
