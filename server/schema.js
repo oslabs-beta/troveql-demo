@@ -2,7 +2,6 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { resolvers } = require('./resolvers');
 
 // Clients can execute a query named movies and the server will return an array of zero or more Movies
-//will need to add Mutations whenever we're ready...
 const typeDefs = `#graphql
   # "Movie" is a type that lets clients query the API by movie title (required)
   type Movie {
@@ -34,14 +33,8 @@ const typeDefs = `#graphql
     deleteMovie(id: ID): Movie!
     editMovie(id:ID, title: String): Movie!
   }
-
- 
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 module.exports = { schema };
-
-// type MovieInput {
-//   title: String!
-// }
