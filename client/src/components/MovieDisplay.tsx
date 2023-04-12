@@ -33,7 +33,7 @@ function MovieDisplay() {
           setMovies(data.data.movies);
           return;
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error('Error getting all movies: ', err));
   }, []);
 
   // Get movie details
@@ -80,7 +80,7 @@ function MovieDisplay() {
         setMovieDetails(detailArr);
         return;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('Error getting movie details: ', err));
   }
 
   function deleteMovie(event: React.MouseEvent<HTMLButtonElement>) {
@@ -100,15 +100,14 @@ function MovieDisplay() {
     })
       .then((response) => {
         if (response.ok) {
-          console.log(`Movie with ID ${movieId} has been deleted.`);
-          const updatedMovies = movies.filter((movie) => movie.id !== movieId); // this is fine
+          const updatedMovies = movies.filter((movie) => movie.id !== movieId);
           setMovies(updatedMovies);
           setMovieDetails([]);
         } else {
-          console.log(`Failed to delete movie with ID ${movieId}.`);
+          console.log('Error deleting a movie: response not OK');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('Error deleting a movie: ', err));
   }
 
   function onEdit(event: React.MouseEvent<HTMLButtonElement>) {
@@ -138,7 +137,6 @@ function MovieDisplay() {
 
   return (
     <div>
-      {/* <ResetMovie movies={movies} setMovies={setMovies} /><br /> */}
       <AddMovie movies={movies} setMovies={setMovies} />
       {modal.display && (
         <div>

@@ -38,8 +38,5 @@ Movie.belongsToMany(Actor, { through: ActorinMovies, foreignKey: 'movie_id' });
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
 ActorinMovies
   .sync({ force: false })
-  .then(() => {
-    console.log("ActorinMovies Model synced");
-  })
 
 module.exports = ActorinMovies;

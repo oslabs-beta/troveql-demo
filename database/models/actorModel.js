@@ -1,10 +1,5 @@
-// import sequelize instance
 const sequelize = require('./index');
-// const sequelize = db.sequelize;
-// import Constructors for model creation
 const { DataTypes } = require('sequelize');
-
-// console.log('actorModel', db, 'sequelize', sequelize);
 
 // create Actor model
 const Actor = sequelize.define("actor", {
@@ -34,8 +29,5 @@ const Actor = sequelize.define("actor", {
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
 Actor
   .sync({ force: false })
-  .then(() => {
-    console.log("Actor Model synced");
-  })
 
 module.exports = Actor;
