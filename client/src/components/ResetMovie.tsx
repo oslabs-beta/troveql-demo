@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import { GetMoviesData } from '../utils/types';
 import queries from '../utils/sample-queries';
 
-function AddMovie(props: any) {
+function ResetMovie (props: any) {
   const [movieTitle, setMovieTitle] = useState('');
 
   function handleReset(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const query: string = queries.resetMovies;
-
-
-    // submit the form data
+    const query: string = queries.resetMovie;
+    // reset movies
     fetch('/troveql', {
       method: 'POST',
       headers: {
@@ -20,8 +19,8 @@ function AddMovie(props: any) {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        props.setMovies([data.data.createMovie]);
+      .then((data: GetMoviesData) => {
+        props.setMovies(data.data.movies);
         return;
       })
       .catch((err) => console.log(err));
@@ -34,4 +33,4 @@ function AddMovie(props: any) {
   );
 }
 
-export default AddMovie;
+export default ResetMovie;

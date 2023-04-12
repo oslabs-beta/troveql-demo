@@ -32,10 +32,10 @@ const Actor = sequelize.define("actor", {
 });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Actor
-//   .sync()
-//   .then(() => {
-//     console.log("Actor Model synced");
-//   })
+Actor
+  .sync({ force: false })
+  .then(() => {
+    console.log("Actor Model synced");
+  })
 
 module.exports = Actor;
