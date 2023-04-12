@@ -3,29 +3,37 @@ import AddMovie from './AddMovie';
 import EditModal from './EditModal';
 import { Movie, GetMoviesData } from '../utils/types';
 import queries from '../utils/sample-queries';
+import { useNavigate } from "react-router-dom";
 
 function MovieDisplay() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [movieDetails, setMovieDetails] = useState<JSX.Element[]>([]);
   const [modal, setModal] = useState<any>({display: false, movieId: null});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const query: string = queries.getMovies;
-    fetch('/troveql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data: GetMoviesData) => {
-        setMovies(data.data.movies);
-        return;
+      const query: string = queries.getMovies;
+      fetch('/troveql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query,
+        }),
       })
-      .catch((err) => console.log(err));
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return navigate('/');
+          }
+        })
+        .then((data: GetMoviesData) => {
+          setMovies(data.data.movies);
+          return;
+        })
+        .catch((err) => console.error(err));
   }, []);
 
   // Get movie details
@@ -48,7 +56,7 @@ function MovieDisplay() {
         const detailArr: JSX.Element[] = [];
         // if actor list exists, create JSX element for each actor, push it to actorList arr and reassign movie actors key with actorList arr
         if (detailObj.actors.length) {
-          let actorList: JSX.Element[] = [];
+          const actorList: JSX.Element[] = [];
           for (let i = 0; i < detailObj.actors.length - 1; i++) {
             actorList.push(<span>{detailObj.actors[i].name} | </span>);
           }
@@ -130,6 +138,7 @@ function MovieDisplay() {
 
   return (
     <div>
+      {/* <ResetMovie movies={movies} setMovies={setMovies} /><br /> */}
       <AddMovie movies={movies} setMovies={setMovies} />
       {modal.display && (
         <div>

@@ -29,10 +29,10 @@ const Movie = sequelize.define("movie", {
 });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Movie
-//   .sync()
-//   .then(() => {
-//     console.log("Movie Model synced");
-//   })
+Movie
+  .sync({ force: false })
+  .then(() => {
+    console.log("Movie Model synced");
+  })
 
 module.exports = Movie;

@@ -9,8 +9,10 @@
     "sequelize-cli": "^6.6.0"
   },
   "scripts": {
+    "server": "cd ./server && npm start",
+    "client": "cd ./client && npm run dev",
     "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\"",
-    "test": "cd ./server && npm link troveql && cd .. &&  npm start",
+    "test": "cd ./server && npm link troveql && cd .. && npm start",
     "lint": "eslint ."
   },
   "devDependencies": {

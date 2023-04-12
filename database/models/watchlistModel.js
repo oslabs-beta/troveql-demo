@@ -30,10 +30,10 @@ const Watchlist = sequelize.define('watchlist', {
 Watchlist.belongsTo(Movie, {foreignKey: 'movie_id'});
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Watchlist
-//   .sync()
-//   .then(() => {
-//     console.log("Watchlist Model synced");
-//   })
+Watchlist
+  .sync({ force: false })
+  .then(() => {
+    console.log("Watchlist Model synced");
+  })
 
 module.exports = Watchlist;

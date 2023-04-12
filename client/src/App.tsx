@@ -1,10 +1,12 @@
 import './App.css'
+// import { useEffect } from 'react'
 import { Route, Routes } from "react-router-dom"
 import Home from './components/Home'
 import MovieDisplay from './components/MovieDisplay'
 import Error from './components/Error'
 
 function App() {
+
   return (
     <div className="movies-container">
         <h1>TROVEQL DEMO</h1>
