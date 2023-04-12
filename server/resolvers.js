@@ -26,12 +26,6 @@ const resolvers = {
       console.log('in edit movie resolver');
       const result = await editMovie(args.id, args.title);
       return result;
-    },
-
-    resetMovie: async () => {
-      console.log('in resetMovie resolver');
-      const result = await resetMovie();
-      return result;
     }
   },
   Query: {
@@ -43,6 +37,11 @@ const resolvers = {
       const result = await getMovie(args.id);
       return result;
     },
+    resetMovie: async () => {
+      console.log('in resetMovie resolver');
+      const result = await resetMovie();
+      return result;
+    }
   },
   Movie: {
     actors: async (parent) => {

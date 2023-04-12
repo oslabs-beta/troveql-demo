@@ -29,7 +29,7 @@ type ServerError = {
 const { TroveQLCache } = require('troveql');
 const mutations = { 
   createMovie: 'movie',
-  deleteMovie: 'movie'
+  deleteMovie: 'movie',
 };
 const cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true, mutations);
 app.use('/troveql', 

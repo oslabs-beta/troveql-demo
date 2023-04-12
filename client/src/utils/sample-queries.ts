@@ -39,7 +39,7 @@ const queries: Query = {
       title
     }
   }`,
-  resetMovie: `mutation {
+  resetMovie: `query {
     resetMovie {
       id
       title

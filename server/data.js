@@ -415,15 +415,17 @@ const editMovie = async (id, title) => {
 const resetMovie = async () => {
   try {
     // delete all join table rows
-    await ActorinMovies.destroy({ 
-      where: {},
-      truncate: true
-    });
+    // await ActorinMovies.destroy({ 
+    //   where: {},
+    //   truncate: true
+    // });
 
     // delete all movies
     await Movie.destroy({ 
       where: {},
-      truncate: true
+      truncate: {
+        cascade: true
+      }
     });
 
     // add default movies

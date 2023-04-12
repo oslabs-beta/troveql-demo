@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 var TroveQLCache = require('troveql').TroveQLCache;
 var mutations = {
     createMovie: 'movie',
-    deleteMovie: 'movie'
+    deleteMovie: 'movie',
 };
 var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true, mutations);
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });

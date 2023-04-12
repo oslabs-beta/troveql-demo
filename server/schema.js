@@ -27,13 +27,13 @@ const typeDefs = `#graphql
     movies: [Movie!]!
     movie(id: ID): Movie!
     actors: [Actor!]!
+    resetMovie: [Movie!]!
   }
 
   type Mutation {
     createMovie(title: String): Movie!
     deleteMovie(id: ID): Movie!
     editMovie(id:ID, title: String): Movie!
-    resetMovie: [Movie!]!
   }
 
  
