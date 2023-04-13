@@ -1,5 +1,5 @@
 // import sequelize instance
-const sequelize  = require('../db_connect');
+const sequelize = require('./index');
 // import Constructors for model creation
 const { DataTypes } = require('sequelize');
 // import movieModel to associate foreign key
@@ -17,12 +17,12 @@ const ActorinMovies = sequelize.define("movie_actor", {
 
   movie_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true,
   },
 
   actor_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
 });
 
@@ -36,10 +36,7 @@ Actor.belongsToMany(Movie, { through: ActorinMovies, foreignKey: 'actor_id' });
 Movie.belongsToMany(Actor, { through: ActorinMovies, foreignKey: 'movie_id' });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// ActorinMovies
-//   .sync()
-//   .then(() => {
-//     console.log("ActorinMovies Model synced");
-//   })
+ActorinMovies
+  .sync({ force: false })
 
 module.exports = ActorinMovies;

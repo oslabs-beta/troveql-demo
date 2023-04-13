@@ -6,7 +6,7 @@ const { DataTypes } = require('sequelize');
 const Movie = require('./movieModel');
 
 // create Watchlist model
-const Watchlist = sequelize.define("watchlist", {
+const Watchlist = sequelize.define('watchlist', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -30,10 +30,7 @@ const Watchlist = sequelize.define("watchlist", {
 Watchlist.belongsTo(Movie, {foreignKey: 'movie_id'});
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Watchlist
-//   .sync()
-//   .then(() => {
-//     console.log("Watchlist Model synced");
-//   })
+Watchlist
+  .sync({ force: false })
 
 module.exports = Watchlist;

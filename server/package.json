@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "tsc index.ts && nodemon index.js",
+    "start": "tsc index.ts && node index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,12 +13,16 @@
   "dependencies": {
     "@graphql-tools/schema": "^9.0.17",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^7.2.1",
     "express": "^4.18.2",
-    "express-graphql": "^0.12.0"
+    "express-graphql": "^0.12.0",
+    "troveql": "^0.1.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "nodemon": "^2.0.21",
+    "sequelize": "^6.31.0",
     "tsc-watch": "^6.0.0",
     "typescript": "^5.0.2"
   }

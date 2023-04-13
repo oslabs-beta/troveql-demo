@@ -1,9 +1,5 @@
-// import sequelize instance
-const sequelize  = require('../db_connect');
-// import Constructors for model creation
+const sequelize = require('./index');
 const { DataTypes } = require('sequelize');
-// import movieModel to associate foreign key
-const Movie = require('./movieModel');
 
 // create Actor model
 const Actor = sequelize.define("actor", {
@@ -31,10 +27,7 @@ const Actor = sequelize.define("actor", {
 });
 
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
-// Actor
-//   .sync()
-//   .then(() => {
-//     console.log("Actor Model synced");
-//   })
+Actor
+  .sync({ force: false })
 
 module.exports = Actor;

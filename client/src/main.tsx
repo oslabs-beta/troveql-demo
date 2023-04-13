@@ -1,8 +1,7 @@
 import 'vite/modulepreload-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
-// Import routes
+import { BrowserRouter as Router} from "react-router-dom"
 import App from './App'
 
 // Import css stylesheet

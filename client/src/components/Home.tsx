@@ -1,37 +1,28 @@
-import { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import queries from '../utils/sample-queries'
-import { Movie, GetMoviesData } from '../utils/types'
+import { useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  // const [movies, changeMovies] = useState<Movie[]>([]);
   const navigate = useNavigate();
+  const dataFetchedRef = useRef(false);
 
-  function handleClicks(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    const query: string = queries[e.currentTarget.id];
-    fetch('/troveql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        query
-      })
-    })
-    .then(response => response.json())
-    .then((data: GetMoviesData) => {
-      // changeMovies(data.data.movies);
-      navigate('/movies', {state:{movies: data.data.movies}});
+  useEffect(() => {
+    if (dataFetchedRef.current) {
       return;
-    })
-    .catch(err => console.log(err))
-  }
-
-
+    } else {
+      dataFetchedRef.current = true;
+      fetch('/reset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .catch((err) => console.log('Error resetting movies in the database: ', err));
+    }
+  }, []);
+  
   return (
     <div className="home-container">
-      <button id="getMovies" onClick={handleClicks}>GET ALL MOVIES</button>
+        <button id="getMovies" onClick={() => navigate('/movies') }>GET ALL MOVIES</button>
     </div>
   )
 }

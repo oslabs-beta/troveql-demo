@@ -1,16 +1,14 @@
-import { Query } from "./types";
+import { Query } from './types';
 
 const queries: Query = {
-  getMovies:
-    `query {
+  getMovies: `query {
         movies {
             id
             title
         }
     }
     `,
-  getMovieDetails: 
-    `query ($id: ID) {
+  getMovieDetails: `query ($id: ID) {
       movie(id: $id) {
           id
           title
@@ -21,7 +19,26 @@ const queries: Query = {
               name
             }
       }
-    }`
-}
+    }`,
+  addMovie: `mutation CreateMovie($title: String) {
+      createMovie(title: $title) {
+        id
+        title
+      }
+    }`,
 
-export default queries
+  deleteMovie: `mutation DeleteMovie($id: ID) {
+      deleteMovie(id: $id) {
+        id
+        title
+      }
+    }`,
+  editMovie: `mutation EditMovie($id: ID, $title: String) {
+    editMovie(id: $id, title: $title) {
+      id
+      title
+    }
+  }`
+};
+
+export default queries;
