@@ -40,9 +40,9 @@ Now go to the <a href="https://www.troveql.io/" target="_blank" rel="noopener no
 
 #### Run the demo
 1. Open your downloaded TroveMetrics desktop application.
-2. Next, install all the dependencies for the Demo App by running `npm install` on your command line in the /client, /server, and root folders.
+2. Next, install all the dependencies for the Demo App by running `npm prestart` on your command line in the root folder.
 3. Finally, run `npm start` from the root directory to start the Demo App on http://localhost:8080/.
-4. Click around and see the TroveQL cache in action from TroveMetrics!
+4. Click around and see the TroveQL cache in action from TroveMetrics! (NOTE: If you are seeing proxy errors from Vite in your terminal, try running `killall node` on your command line before running `npm start` again.)
 
 #### (Optional) Configure your instance of TroveQL
 In the index.ts file in the /server folder, you can customize your TroveQL cache configuration:
