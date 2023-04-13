@@ -42,10 +42,3 @@ const queries: Query = {
 };
 
 export default queries;
-
-// resetMovie: `query {
-//   resetMovie {
-//     id
-//     title
-//   }
-// }`

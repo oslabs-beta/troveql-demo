@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -16,9 +16,7 @@ function Home() {
           'Content-Type': 'application/json',
         }
       })
-        .then((response) => response.json())
-        .then((text) => console.log(text))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log('Error resetting movies in the database: ', err));
     }
   }, []);
   

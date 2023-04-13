@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// const express = require('express');
 var express = require('express');
 var graphqlHTTP = require('express-graphql').graphqlHTTP;
 var cors = require('cors');
@@ -13,12 +12,13 @@ app.use(express.urlencoded({ extended: true }));
 // The TroveQLCache middleware function requires 2 arguments with an addition 2 optional arguments:
 // (1) size for the cache
 // (2) your server's graphQL URL endpoint
-// (3) optional - boolean for if you want   to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
+// (3) optional - boolean for if you want to use TM (defaults to false but if 'true' will need to add /trovemetrics route too)
 // (4) optional - object where the key is the name of your graphQL mutation query and the value is a string of the object Type it mutates
 var TroveQLCache = require('troveql').TroveQLCache;
 var mutations = {
     createMovie: 'movie',
     deleteMovie: 'movie',
+    editMovie: 'movie'
 };
 var cache = new TroveQLCache(5, 'http://localhost:4000/graphql', true, mutations);
 app.use('/troveql', cache.queryCache, function (req, res) { return res.status(200).json(res.locals.value); });
@@ -27,17 +27,18 @@ app.use('/trovemetrics', cache.troveMetrics, function (req, res) { return res.st
 var resetMovies = require('./data').resetMovies;
 // reset the db whenever the app initially loads
 app.use('/reset', 
-//create a middleware function that uses resetMovie from data.json
+//middleware function that uses resetMovie from data.js
 function (req, res, next) {
     resetMovies();
     next();
-}, cache.troveMetrics, function (req, res) { return res.status(200).json('resetMovies run!'); });
+}, 
+//clear the cache in TM once we reset all the movies in the db
+cache.troveMetrics, function (req, res) { return res.status(200).json('resetMovies function run!'); });
 var schema = require('./schema').schema;
 var resolvers = require('./resolvers').resolvers;
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
-    // context: {},
     graphiql: true
 }));
 app.use('/', function (err, req, res, next) {

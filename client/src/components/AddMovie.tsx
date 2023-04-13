@@ -31,7 +31,7 @@ function AddMovie(props: any) {
         setMovieTitle('');
         return;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('Error adding a movie: ', err));
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {

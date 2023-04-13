@@ -32,8 +32,5 @@ Watchlist.belongsTo(Movie, {foreignKey: 'movie_id'});
 // UNCOMMENT THE FOLLOWING CODE to call sync method on model to create/update table
 Watchlist
   .sync({ force: false })
-  .then(() => {
-    console.log("Watchlist Model synced");
-  })
 
 module.exports = Watchlist;

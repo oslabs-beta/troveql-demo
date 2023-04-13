@@ -1,7 +1,3 @@
-export type Query = {
-  [key : string] : string
-}
-
 export type Actor = {
   id: number,
   name: string
@@ -20,8 +16,4 @@ export type GetMoviesData = {
   data: {
     movies: Movie[]
   }
-}
-
-export type MovieDisplayProps = {
-  movies: Movie[]
 }

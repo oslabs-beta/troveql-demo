@@ -34,10 +34,9 @@ function EditModal(props:any): JSX.Element {
     })
       .then((response) => {
         if (response.ok) return response.json();
-        else console.log(`Failed to edit movie with ID ${movieId}.`)
+        else console.log('Error editing a movie: response not OK');
       })
       .then((data) => {
-        console.log(`Movie with ID ${movieId} has been edited.`);
         props.setMovies((prevMovies: Movie[]) => {
           const updatedMovies: Movie[] = [];
           prevMovies.forEach((movie: Movie)=>{
@@ -47,7 +46,7 @@ function EditModal(props:any): JSX.Element {
           return updatedMovies;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('Error editing a movie: ', err));
     }
 
     function onCancel(e: React.MouseEvent<HTMLButtonElement>) {

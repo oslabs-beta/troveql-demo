@@ -1,48 +1,8 @@
 const Movie = require('../database/models/movieModel');
 const Actor = require('../database/models/actorModel');
 const ActorinMovies = require('../database/models/movie_actorModel');
-const sequelize = require('sequelize');
 
-// Getting all movies
-
-// example of output:
-// [
-// {
-//   id: 7,
-//   title: 'Forrest Gump',
-//   genre: 'Drama',
-//   year: 1994,
-//   actors: [
-// {
-//       id: 2,
-//       name: 'Leonardo DiCaprio',
-//       gender: 'Male',
-//       place_of_birth: 'USA',
-//       createdAt: 2023-03-25T23:57:39.571Z,
-//       updatedAt: 2023-03-25T23:57:39.571Z,
-//       movie_actor: [movie_actor]
-//     },
-//  ]
-// },
-// {
-//   id: 9,
-//   title: 'Titanic',
-//   genre: 'Romance',
-//   year: 1997,
-//   actors: [ [Object], [Object] ]
-// },
-// ]
-
-
-// set up an endpoint in our demo server /reset that gets called from the FE with useEffect only on initial app load
-  // this endpoint will include 2 middleware functions: 
-    // (1) resetMovies which will
-      // (a) delete everything in the db 
-      // (b) and then add everything back (movies + actors)
-    // (2) call cache.troveMetrics (in the demo app we have troveMetrics set to TRUE) which is a function that clears the cache - since the data could be invalid
-
-// getMovies would get all movies from the db and would only run when we click the Get All Movies button
-
+// Get all movies
 const getMovies = async () => {
   try {
     const movies = await Movie.findAll({
@@ -60,7 +20,6 @@ const getMovies = async () => {
     });
     const allMovies = [];
     movies.forEach((movie) => {
-      // refine actor.dataValues.movies list
       const actorList = [];
       const arrayOfActors = movie.dataValues.actors;
       arrayOfActors.forEach((actor) => actorList.push(actor.dataValues));
@@ -68,18 +27,14 @@ const getMovies = async () => {
       // push movie.dataValues object to allMovies
       allMovies.push(movie.dataValues);
     });
-    // console.log(allMovies);
-    console.log('Got all movies from db');
     return allMovies;
   } catch (error) {
-    console.error(error);
+    console.error('Error getting all movies with Sequelize: ', error);
     return;
   }
 };
 
-// getMovies();
-
-// Getting a movie's detail
+// Getting a movie's details
 const getMovie = async (id) => {
   try {
     const movie = await Movie.findOne({
@@ -87,18 +42,14 @@ const getMovie = async (id) => {
         id: id,
       },
     });
-    console.log('Got a movie from db');
-    // console.log('singleMovie', movie.dataValues);
     return movie.dataValues;
   } catch (error) {
-    console.error(error);
+    console.error('Error getting movie details with Sequelize: ', error);
     return;
   }
 };
 
-// getMovie(3);
-
-
+// get all actors for a movie
 const getActorsFromMovieID = async (id) => {
   try {
     const actors = await Actor.findAll({
@@ -116,7 +67,6 @@ const getActorsFromMovieID = async (id) => {
         },
       ],
     });
-    console.log('Got actors for a movie from db');
     const allActors = [];
     actors.forEach((actor) => {
       // refine actor.dataValues.movies list
@@ -127,26 +77,20 @@ const getActorsFromMovieID = async (id) => {
       // push actor.dataValues object to allActors
       allActors.push(actor.dataValues);
     });
-    console.log(allActors);
     return allActors;
   } catch (error) {
-    console.error(error);
+    console.error('Error getting actors for a movie with Sequelize: ', error);
     return;
   }
 };
 
-// getActorsFromMovieID(9);
-
-// Adding a movie to movie list
+// Add a movie
 const addMovie = async (title) => {
   const addMovie = await Movie.create({
     title: title,
   });
-  console.log('addMovie', addMovie.dataValues);
   return addMovie.dataValues;
 };
-
-// addMovie('test');
 
 // Deleting a movie from a user's movie list
 // Deleting movie_id row also from join table
@@ -155,7 +99,6 @@ const deleteMovie = async (id) => {
     //first find the movie and await the result, then destroy
     //return the result of the find querey;
     //shape should be similar to add movie
-
     /**
      *     id: ID!
            title: String!
@@ -169,11 +112,8 @@ const deleteMovie = async (id) => {
         id: id,
       },
     });
-
-    console.log('MOVIE TO DELETE IN DATA.JS', movieToDelete);
-
     if (!movieToDelete) {
-      console.log(`Movie with id ${id} not found`);
+      console.log('Error deleting a movie: could not find movie in the database');
       return;
     }
 
@@ -186,7 +126,7 @@ const deleteMovie = async (id) => {
     });
     
     if (movieInJoinTable === 0) {
-      console.log(`Movie with id ${id} is not found in movie_actor join table`);
+      console.log('Error deleting a movie: could not find  movie_actor join table for movie in the database');
     }
     
     // Delete the movie from the database
@@ -195,19 +135,13 @@ const deleteMovie = async (id) => {
         id: id,
       },
     });
-
-    console.log(movieToDelete);
     return movieToDelete;
-    console.log(`Movie with id ${id} deleted from db`);
   } catch (error) {
-    console.error(error);
+    console.error('Error deleting a movie with Sequelize: ', error);
   }
 };
 
-// deleteMovie(14);
-
-
-// Editing a movie 
+// Edit a movie 
 const editMovie = async (id, title) => {
   try {
     // Find the movie to edit
@@ -216,30 +150,26 @@ const editMovie = async (id, title) => {
         id: id,
       },
     });
-    console.log('MOVIE TO EDIT IN DATA.JS', movieToEdit);
     if (!movieToEdit) {
-      console.log(`Movie with id ${id} not found`);
+      console.log('Error deleting a movie: could not find movie in the database');
       return;
     }
     // Edit the movie in the database
-    console.log('THIS IS THE NEW TITLE', title)
     const updatedMovie = await Movie.update(
       {title: title },
       {returning: true, where: {id: id}}
     );
-    console.log('UPDATED MOVIE', updatedMovie)
     return updatedMovie[1][0];
   } catch (error) {
-    console.error(error);
+    console.error('Error deleting a movie with Sequelize: ', error);
   }
 };
 
 
-// Reset movies 
+// Reset movies in the db
   // Delete all movies
   // Create default movies
   // Add movies to join table with actors
-
 const resetMovies = async () => {
   try {
       // for new users, // if actor table is empty,
@@ -299,7 +229,7 @@ const resetMovies = async () => {
       } else if (actorCount !== 0) {
         await ActorinMovies.destroy({ where: {} });
         await Movie.destroy({ where: {} });
-        await Movie.bulkCreate(testMovies); //check this...
+        await Movie.bulkCreate(testMovies);
         // add join table back in via movie title
         const movie1 = await Movie.findOne({ where: { title: 'Forrest Gump' } });
         const movie2 = await Movie.findOne({ where: { title: 'Pulp Fiction' } });
@@ -326,13 +256,9 @@ const resetMovies = async () => {
         return;
       }
   } catch (error) {
-    console.error(error);
+    console.error('Error resetting movies in the database with Sequelize: ', error);
   }
 };
-
-
-
-
 
 module.exports = {
   getMovies,
