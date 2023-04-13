@@ -13,7 +13,6 @@
     "client": "cd ./client && npm run dev",
     "prestart": "cd ./server && npm install && cd .. && cd ./client && npm install && cd .. && npm install",
     "start": "concurrently \"cd ./server && npm start\" \"cd ./client && npm run dev\"",
-    "test": "cd ./server && npm link troveql && cd .. && npm start",
     "lint": "eslint ."
   },
   "devDependencies": {
