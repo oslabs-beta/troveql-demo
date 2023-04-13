@@ -38,13 +38,11 @@ PG_URI=//insert your postgresql URI here
 #### Download TroveMetrics
 Now go to the <a href="https://www.troveql.io/" target="_blank" rel="noopener noreferrer">TroveQL website</a> and download the desktop application for your OS (macOS, Windows, Linux).
 
-#### Install all the dependencies
-Install all the dependencies for the Demo App by running `npm install` on your command line in the /client, /server, and root folders.
-
 #### Run the demo
 1. Open your downloaded TroveMetrics desktop application.
-2. On your command line, run `npm start` to start the Demo App on http://localhost:8080/.
-2. Click around and see the TroveQL cache in action through TroveMetrics!
+2. Next, install all the dependencies for the Demo App by running `npm install` on your command line in the /client, /server, and root folders.
+3. Finally, run `npm start` from the root directory to start the Demo App on http://localhost:8080/.
+4. Click around and see the TroveQL cache in action from TroveMetrics!
 
 #### (Optional) Configure your instance of TroveQL
 In the index.ts file in the /server folder, you can customize your TroveQL cache configuration:
@@ -57,7 +55,7 @@ const cache = new TroveQLCache(capacity, graphQLAPI, useTroveMetrics, mutations)
 ```
 To learn more about TroveQL's cache configruation options, visit <a href="https://github.com/oslabs-beta/troveql">TroveQL's GitHub page</a>.
 
-## Learn more about TroveQL and TroveMetrics
+## Learn More
 Visit the <a target="_blank" rel="noopener noreferrer" href="https://www.troveql.io/">TroveQL website</a> to get more information and watch a video demo of TroveQL and TroveMetrics.
 
 Thank you so much!
