@@ -25,7 +25,7 @@ git clone https://github.com/oslabs-beta/troveql-demo.git
 ```
 #### Set up a PostgreSQL database using ElephantSQL
 1. Go to [ElephantSQL](https://www.elephantsql.com/), sign in or register for an account, and create a new database instance. Select the free tier as 'Tiny Turtle'. The instance's name and datacenter are up to you.
-2. Copy your new database instance's URI from the DETAILS tab.
+2. Copy your new database instance's URL from the DETAILS tab.
 3. Check that you have [PostgresQL](https://www.postgresql.org/download/) installed. You can run `psql --version` on your command line to check.
 
 #### Set up your .env file
