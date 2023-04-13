@@ -33,7 +33,6 @@ git clone https://github.com/oslabs-beta/troveql-demo.git
 2. Create a .env file in the server directory and add the following:
 ```javascript
 PG_URI=//insert your postgresql URI here
-NODE_ENV="development"
 ``` 
 
 #### Download TroveMetrics
