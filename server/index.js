@@ -33,7 +33,7 @@ function (req, res, next) {
     next();
 }, 
 //clear the cache in TM once we reset all the movies in the db
-cache.troveMetrics, function (req, res) { return res.status(200).json('resetMovies function run!'); });
+cache.resetCache, function (req, res) { return res.status(200).json('resetMovies function run!'); });
 var schema = require('./schema').schema;
 var resolvers = require('./resolvers').resolvers;
 app.use('/graphql', graphqlHTTP({

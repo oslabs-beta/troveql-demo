@@ -51,7 +51,7 @@ app.use('/reset',
     next();
   },
   //clear the cache in TM once we reset all the movies in the db
-  cache.troveMetrics,
+  cache.resetCache,
   (req: Request, res: Response) => res.status(200).json('resetMovies function run!')
 );
 

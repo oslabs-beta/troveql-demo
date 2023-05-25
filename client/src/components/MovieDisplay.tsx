@@ -30,6 +30,7 @@ function MovieDisplay() {
           }
         })
         .then((data: GetMoviesData) => {
+          console.log('data', data.data.movies);
           setMovies(data.data.movies);
           return;
         })
