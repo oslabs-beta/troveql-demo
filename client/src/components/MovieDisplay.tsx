@@ -135,6 +135,11 @@ function MovieDisplay() {
     );
   });
 
+  // click on back button to navigate back to home page
+  window.onpopstate = () => {
+    navigate('/');
+  }
+
   return (
     <div>
       <AddMovie movies={movies} setMovies={setMovies} />
